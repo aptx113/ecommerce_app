@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'features/products_list/products_list_screen.dart';
-import 'localization/string_hardcoded.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -18,8 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       restorationScopeId: 'app',
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: const ProductsListScreen(),
-      onGenerateTitle: (BuildContext context) => 'My Shop'.hardcoded,
+      onGenerateTitle: (BuildContext context) =>
+          AppLocalizations.of(context)!.appTitle,
       theme: ThemeData(
         primarySwatch: Colors.grey,
         appBarTheme: const AppBarTheme(
