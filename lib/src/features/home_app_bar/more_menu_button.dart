@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../models/app_user.dart';
+import '../../routing/app_router.dart';
 
 enum PopupMenuOption {
   signIn(key: 'menuSignIn'),
@@ -50,13 +51,13 @@ class MoreMenuButton extends StatelessWidget {
       onSelected: (option) {
         switch (option) {
           case PopupMenuOption.signIn:
-            context.go('/signIn');
+            context.goNamed(AppRoute.signIn.name);
             break;
           case PopupMenuOption.orders:
-            context.go('/orders');
+            context.goNamed(AppRoute.orders.name);
             break;
           case PopupMenuOption.account:
-            context.go('/account');
+            context.go(AppRoute.account.name);
             break;
         }
       },
