@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'src/app.dart';
 import 'src/localization/string_hardcoded.dart';
@@ -10,6 +11,7 @@ void main() async {
   // * https://docs.flutter.dev/testing/errors
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
     // * Entry point of the app
     runApp(const MyApp());
 

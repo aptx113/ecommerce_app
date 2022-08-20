@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../localization/string_hardcoded.dart';
 import '../../models/app_user.dart';
-import '../account/account_screen.dart';
-import '../orders_list/orders_list_screen.dart';
-import '../sign_in/email_password_sign_in_screen.dart';
-import '../sign_in/email_password_sign_in_state.dart';
 
 enum PopupMenuOption {
   signIn(key: 'menuSignIn'),
@@ -34,49 +31,32 @@ class MoreMenuButton extends StatelessWidget {
                 PopupMenuItem(
                   key: ordersKey,
                   value: PopupMenuOption.orders,
-                  child: Text('Orders'.hardcoded),
+                  child: Text(AppLocalizations.of(context)!.orders),
                 ),
                 PopupMenuItem(
                   key: accountKey,
                   value: PopupMenuOption.account,
-                  child: Text('Account'.hardcoded),
+                  child: Text(AppLocalizations.of(context)!.account),
                 ),
               ]
             : <PopupMenuEntry<PopupMenuOption>>[
                 PopupMenuItem(
                   key: signInKey,
                   value: PopupMenuOption.signIn,
-                  child: Text('Sign In'.hardcoded),
+                  child: Text(AppLocalizations.of(context)!.signIn),
                 ),
               ];
       },
       onSelected: (option) {
         switch (option) {
           case PopupMenuOption.signIn:
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                fullscreenDialog: true,
-                builder: (_) => const EmailPasswordSignInScreen(
-                  formType: EmailPasswordSignInFormType.signIn,
-                ),
-              ),
-            );
+            context.go('/signIn');
             break;
           case PopupMenuOption.orders:
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                fullscreenDialog: true,
-                builder: (_) => const OrdersListScreen(),
-              ),
-            );
+            context.go('/orders');
             break;
           case PopupMenuOption.account:
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                fullscreenDialog: true,
-                builder: (_) => const AccountScreen(),
-              ),
-            );
+            context.go('/account');
             break;
         }
       },
