@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/src/models/product.dart';
+import 'package:ecommerce_app/src/features/products/models/product.dart';
 
 /// Test products to be used until a data source is implemented
 const testProducts = [

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../localization/app_localizations_of.dart';
-import '../sign_in/email_password_sign_in_screen.dart';
-import '../sign_in/email_password_sign_in_state.dart';
+import '../authentication/ui/sign_in/email_password_sign_in_screen.dart';
+import '../authentication/ui/sign_in/email_password_sign_in_state.dart';
 import 'payment/payment_page.dart';
 
 enum CheckoutSubRoute { register, payment }

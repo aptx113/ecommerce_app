@@ -1,16 +1,16 @@
-import 'package:ecommerce_app/src/features/checkout/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../features/account/account_screen.dart';
-import '../features/leave_review_page/leave_review_screen.dart';
-import '../features/not_found/not_found_screen.dart';
-import '../features/orders_list/orders_list_screen.dart';
-import '../features/product_page/product_screen.dart';
-import '../features/products_list/products_list_screen.dart';
-import '../features/shopping_cart/shopping_cart_screen.dart';
-import '../features/sign_in/email_password_sign_in_screen.dart';
-import '../features/sign_in/email_password_sign_in_state.dart';
+import '../features/authentication/ui/account/account_screen.dart';
+import '../features/authentication/ui/sign_in/email_password_sign_in_screen.dart';
+import '../features/authentication/ui/sign_in/email_password_sign_in_state.dart';
+import '../features/cart/ui/shopping_cart/shopping_cart_screen.dart';
+import '../features/checkout/checkout_screen.dart';
+import '../features/orders/ui/orders_list_screen.dart';
+import '../features/products/ui/product_screen/product_screen.dart';
+import '../features/products/ui/products_list/products_list_screen.dart';
+import '../features/reviews/ui/leave_review_screen/leave_review_screen.dart';
+import 'not_found_screen.dart';
 
 enum AppRoute {
   home,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/item.dart';
-import '../../shopping_cart/shopping_cart_item.dart';
-import '../../shopping_cart/shopping_cart_item_builder.dart';
+import '../../cart/models/item.dart';
+import '../../cart/ui/shopping_cart/shopping_cart_item.dart';
+import '../../cart/ui/shopping_cart/shopping_cart_item_builder.dart';
 import 'payment_button.dart';
 
 class PaymentPage extends StatelessWidget {
