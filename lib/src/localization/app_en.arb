@@ -34,6 +34,8 @@
     "invalidEmailEmpty": "Email can't be empty",
     "invalidPasswordTooShort": "Password is too short",
     "invalidPasswordEmpty": "Password can't be empty",
+    "areYouSure": "Are you sure?",
+    "cancel": "Cancel",
     "logout": "Logout",
     "submit": "Submit",
     "invalidEmail": "Invalid email",

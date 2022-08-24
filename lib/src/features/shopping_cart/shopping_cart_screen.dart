@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../common_widgets/primary_button.dart';
-import '../../localization/string_hardcoded.dart';
 import '../../models/item.dart';
-import '../checkout/checkout_screen.dart';
+import '../../routing/app_router.dart';
 import 'shopping_cart_item.dart';
 import 'shopping_cart_item_builder.dart';
 
@@ -19,20 +20,15 @@ class ShoppingCartScreen extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shopping Cart'.hardcoded),
+        title: Text(AppLocalizations.of(context)!.shoppingCart),
       ),
       body: ShoppingCartItemsBuilder(
         items: cartItemsList,
         itemBuilder: (_, item, index) =>
             ShoppingCartItem(item: item, itemIndex: index),
         ctaBuilder: (_) => PrimaryButton(
-          text: 'Checkout'.hardcoded,
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              fullscreenDialog: true,
-              builder: (_) => const CheckoutScreen(),
-            ),
-          ),
+          text: AppLocalizations.of(context)!.checkout,
+          onPressed: () => context.pushNamed(AppRoute.checkout.name),
         ),
       ),
     );

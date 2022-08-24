@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../common_widgets/primary_button.dart';
 import '../../constants/app_sizes.dart';
-import '../../localization/string_hardcoded.dart';
+import '../../routing/app_router.dart';
 
 class EmptyPlaceholderWidget extends StatelessWidget {
   const EmptyPlaceholderWidget({
@@ -28,9 +30,8 @@ class EmptyPlaceholderWidget extends StatelessWidget {
             ),
             gapH32,
             PrimaryButton(
-              onPressed: () =>
-                  Navigator.of(context).popUntil((route) => route.isFirst),
-              text: 'Go Home'.hardcoded,
+              onPressed: () => context.goNamed(AppRoute.home.name),
+              text: AppLocalizations.of(context)!.goHome,
             )
           ],
         ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../common_widgets/action_text_button.dart';
 import '../../common_widgets/alert_dialogs.dart';
 import '../../common_widgets/responsive_center.dart';
 import '../../constants/app_sizes.dart';
+import '../../localization/app_localizations_of.dart';
 import '../../localization/string_hardcoded.dart';
 import '../../models/app_user.dart';
 
@@ -14,12 +16,16 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Account'.hardcoded),
+        title: Text(context.localizations!.account),
         actions: [
           ActionTextButton(
-            text: 'Logout'.hardcoded,
+            text: context.localizations!.logout,
             onPressed: () async {
-              showNotImplementedAlertDialog(context: context);
+              final logout = await showAlertDialog(
+                  context: context,
+                  title: AppLocalizations.of(context)!.areYouSure,
+                  cancelActionText: AppLocalizations.of(context)!.cancel,
+                  defaultActionText: AppLocalizations.of(context)!.logout);
             },
           )
         ],
@@ -41,24 +47,24 @@ class UserDataTable extends StatelessWidget {
     return DataTable(columns: [
       DataColumn(
         label: Text(
-          'Field'.hardcoded,
+          context.localizations!.field,
           style: style,
         ),
       ),
       DataColumn(
         label: Text(
-          'Value'.hardcoded,
+          context.localizations!.value,
           style: style,
         ),
       )
     ], rows: [
       _makeDataRow(
-        'uid'.hardcoded,
+        context.localizations!.uidLowercase,
         user.uid,
         style,
       ),
       _makeDataRow(
-        'email'.hardcoded,
+        context.localizations!.emailLowercase,
         user.email ?? '',
         style,
       )

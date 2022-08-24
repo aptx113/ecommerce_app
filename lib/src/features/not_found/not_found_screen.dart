@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../localization/string_hardcoded.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'empty_placeholder_widget.dart';
 
 class NotFoundScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class NotFoundScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: EmptyPlaceholderWidget(
-        message: '404 - Page not found!'.hardcoded,
+        message: AppLocalizations.of(context)!.notFound404,
       ),
     );
   }
