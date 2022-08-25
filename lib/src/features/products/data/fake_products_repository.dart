@@ -4,9 +4,22 @@ import '../models/product.dart';
 class FakeProductsRepository {
   FakeProductsRepository._();
   static FakeProductsRepository instance = FakeProductsRepository._();
-  List<Product> get getProductsList => testProducts;
-  
+  final _products = testProducts;
+
+  List<Product> get getProductsList => _products;
+
   Product? getProduct(String id) {
-    return testProducts.firstWhere((product) => product.id == id);
+    return _products.firstWhere((product) => product.id == id);
+  }
+
+  Future<List<Product>> fetchProductsList() {
+    return Future.value(_products);
+  }
+
+  Stream<List<Product>> watchProductsList() => Stream.value(_products);
+
+  Stream<Product?> watchProduct(String id) {
+    return watchProductsList()
+        .map((products) => products.firstWhere((product) => product.id == id));
   }
 }

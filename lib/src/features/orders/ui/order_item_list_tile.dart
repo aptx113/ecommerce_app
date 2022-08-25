@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../../common_widgets/custom_image.dart';
 import '../../../constants/app_sizes.dart';
-import '../../../constants/test_products.dart';
-import '../../../localization/string_hardcoded.dart';
+import '../../../localization/app_localizations_of.dart';
 import '../../cart/models/item.dart';
+import '../../products/data/fake_products_repository.dart';
 
 class OrderItemListTile extends StatelessWidget {
   const OrderItemListTile({
@@ -16,9 +16,7 @@ class OrderItemListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = testProducts.firstWhere(
-      (product) => product.id == item.productId,
-    );
+    final product = FakeProductsRepository.instance.getProduct(item.productId)!;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Sizes.p8),
       child: Row(
@@ -38,7 +36,7 @@ class OrderItemListTile extends StatelessWidget {
                 Text(product.title),
                 gapH12,
                 Text(
-                  'Quantity: ${item.quantity}'.hardcoded,
+                  context.localizations!.quantityValue(item.quantity),
                   style: Theme.of(context).textTheme.caption,
                 ),
               ],

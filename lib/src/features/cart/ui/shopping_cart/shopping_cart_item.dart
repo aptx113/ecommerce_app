@@ -9,11 +9,10 @@ import '../../../../common_widgets/custom_image.dart';
 import '../../../../common_widgets/item_quantity_selector.dart';
 import '../../../../common_widgets/responsive_two_column_layout.dart';
 import '../../../../constants/app_sizes.dart';
-import '../../../../constants/test_products.dart';
 import '../../../../localization/app_localizations_of.dart';
+import '../../../products/data/fake_products_repository.dart';
 import '../../../products/models/product.dart';
 import '../../models/item.dart';
-
 
 class ShoppingCartItem extends StatelessWidget {
   const ShoppingCartItem({
@@ -28,8 +27,8 @@ class ShoppingCartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product =
-        testProducts.firstWhere((product) => product.id == item.productId);
+    final product = FakeProductsRepository.instance.getProduct(item.productId)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Sizes.p8),
       child: Card(
