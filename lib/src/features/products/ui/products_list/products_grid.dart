@@ -6,9 +6,11 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../common_widgets/async_value_widget.dart';
 import '../../../../constants/app_sizes.dart';
 import '../../../../routing/app_router.dart';
 import '../../data/fake_products_repository.dart';
+import '../../models/product.dart';
 import 'product_card.dart';
 
 class ProductsGrid extends ConsumerWidget {
@@ -16,27 +18,30 @@ class ProductsGrid extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final productsRepository = ref.watch(productsRepositoryProvider);
-    final products = productsRepository.getProductsList;
-    return products.isEmpty
-        ? Center(
-            child: Text(
-              AppLocalizations.of(context)!.noProductsFound,
-              style: Theme.of(context).textTheme.headline4,
+    final productsListValue = ref.watch(productsListStreamProvider);
+    return AsyncValueWidget<List<Product>>(
+      value: productsListValue,
+      data: (products) => products.isEmpty
+          ? Center(
+              child: Text(
+                AppLocalizations.of(context)!.noProductsFound,
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            )
+          : ProductsLayoutGrid(
+              itemCount: products.length,
+              itemBuilder: (_, index) {
+                final product = products[index];
+                return ProductCard(
+                  product: product,
+                  onPressed: () => context.goNamed(
+                    AppRoute.product.name,
+                    params: {'id': product.id},
+                  ),
+                );
+              },
             ),
-          )
-        : ProductsLayoutGrid(
-            itemCount: products.length,
-            itemBuilder: (_, index) {
-              final product = products[index];
-              return ProductCard(
-                product: product,
-                onPressed: () => context.goNamed(
-                  AppRoute.product.name,
-                  params: {'id': product.id},
-                ),
-              );
-            });
+    );
   }
 }
 

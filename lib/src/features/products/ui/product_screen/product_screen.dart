@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../common_widgets/async_value_widget.dart';
 import '../../../../common_widgets/custom_image.dart';
 import '../../../../common_widgets/empty_placeholder_widget.dart';
 import '../../../../common_widgets/responsive_center.dart';
@@ -30,25 +31,27 @@ class ProductScreen extends StatelessWidget {
       appBar: const HomeAppBar(),
       body: Consumer(
         builder: (context, ref, _) {
-          final productsRepository = ref.watch(productsRepositoryProvider);
-          final product = productsRepository.getProduct(productId);
-          return product == null
-              ? EmptyPlaceholderWidget(
-                  message: 'Product not found'.hardcoded,
-                )
-              : CustomScrollView(
-                  slivers: [
-                    ResponsiveSliverCenter(
-                      padding: const EdgeInsets.all(Sizes.p16),
-                      child: ProductDetails(
-                        product: product,
+          final productValue = ref.watch(productStreamProvider(productId));
+          return AsyncValueWidget<Product?>(
+            value: productValue,
+            data: (product) => product == null
+                ? EmptyPlaceholderWidget(
+                    message: 'Product not found'.hardcoded,
+                  )
+                : CustomScrollView(
+                    slivers: [
+                      ResponsiveSliverCenter(
+                        padding: const EdgeInsets.all(Sizes.p16),
+                        child: ProductDetails(
+                          product: product,
+                        ),
                       ),
-                    ),
-                    ProductReviewsList(
-                      productId: productId,
-                    )
-                  ],
-                );
+                      ProductReviewsList(
+                        productId: productId,
+                      )
+                    ],
+                  ),
+          );
         },
       ),
     );
