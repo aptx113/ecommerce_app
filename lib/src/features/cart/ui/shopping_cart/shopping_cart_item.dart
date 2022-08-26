@@ -2,6 +2,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../common_widgets/alert_dialogs.dart';
@@ -14,7 +15,7 @@ import '../../../products/data/fake_products_repository.dart';
 import '../../../products/models/product.dart';
 import '../../models/item.dart';
 
-class ShoppingCartItem extends StatelessWidget {
+class ShoppingCartItem extends ConsumerWidget {
   const ShoppingCartItem({
     Key? key,
     required this.item,
@@ -26,8 +27,9 @@ class ShoppingCartItem extends StatelessWidget {
   final bool isEditable;
 
   @override
-  Widget build(BuildContext context) {
-    final product = FakeProductsRepository.instance.getProduct(item.productId)!;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productsRepository = ref.watch(productsRepositoryProvider);
+    final product = productsRepository.getProduct(item.productId)!;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Sizes.p8),

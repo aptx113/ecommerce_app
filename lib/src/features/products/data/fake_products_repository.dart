@@ -1,9 +1,9 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../constants/test_products.dart';
 import '../models/product.dart';
 
 class FakeProductsRepository {
-  FakeProductsRepository._();
-  static FakeProductsRepository instance = FakeProductsRepository._();
   final _products = testProducts;
 
   List<Product> get getProductsList => _products;
@@ -23,3 +23,7 @@ class FakeProductsRepository {
         .map((products) => products.firstWhere((product) => product.id == id));
   }
 }
+
+final productsRepositoryProvider = Provider<FakeProductsRepository>((ref) {
+  return FakeProductsRepository();
+});

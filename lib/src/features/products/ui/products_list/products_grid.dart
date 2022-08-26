@@ -1,21 +1,23 @@
 import 'dart:math';
 
-import '../../data/fake_products_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../constants/app_sizes.dart';
 import '../../../../routing/app_router.dart';
+import '../../data/fake_products_repository.dart';
 import 'product_card.dart';
 
-class ProductsGrid extends StatelessWidget {
+class ProductsGrid extends ConsumerWidget {
   const ProductsGrid({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final products = FakeProductsRepository.instance.getProductsList;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productsRepository = ref.watch(productsRepositoryProvider);
+    final products = productsRepository.getProductsList;
     return products.isEmpty
         ? Center(
             child: Text(

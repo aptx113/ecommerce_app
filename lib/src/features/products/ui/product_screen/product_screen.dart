@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widgets/custom_image.dart';
 import '../../../../common_widgets/empty_placeholder_widget.dart';
@@ -25,26 +26,31 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = FakeProductsRepository.instance.getProduct(productId);
     return Scaffold(
       appBar: const HomeAppBar(),
-      body: product == null
-          ? EmptyPlaceholderWidget(
-              message: 'Product not found'.hardcoded,
-            )
-          : CustomScrollView(
-              slivers: [
-                ResponsiveSliverCenter(
-                  padding: const EdgeInsets.all(Sizes.p16),
-                  child: ProductDetails(
-                    product: product,
-                  ),
-                ),
-                ProductReviewsList(
-                  productId: productId,
+      body: Consumer(
+        builder: (context, ref, _) {
+          final productsRepository = ref.watch(productsRepositoryProvider);
+          final product = productsRepository.getProduct(productId);
+          return product == null
+              ? EmptyPlaceholderWidget(
+                  message: 'Product not found'.hardcoded,
                 )
-              ],
-            ),
+              : CustomScrollView(
+                  slivers: [
+                    ResponsiveSliverCenter(
+                      padding: const EdgeInsets.all(Sizes.p16),
+                      child: ProductDetails(
+                        product: product,
+                      ),
+                    ),
+                    ProductReviewsList(
+                      productId: productId,
+                    )
+                  ],
+                );
+        },
+      ),
     );
   }
 }
