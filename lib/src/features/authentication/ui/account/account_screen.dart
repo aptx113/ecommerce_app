@@ -1,5 +1,9 @@
+import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
+import 'package:ecommerce_app/src/features/authentication/ui/account/account_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../common_widgets/action_text_button.dart';
 import '../../../../common_widgets/alert_dialogs.dart';
@@ -8,25 +12,37 @@ import '../../../../constants/app_sizes.dart';
 import '../../../../localization/app_localizations_of.dart';
 import '../../models/app_user.dart';
 
-
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends ConsumerWidget {
   const AccountScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(accountScreenControllerProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.localizations!.account),
+        title: state.isLoading
+            ? const CircularProgressIndicator()
+            : Text(context.localizations!.account),
         actions: [
           ActionTextButton(
             text: context.localizations!.logout,
-            onPressed: () async {
-              final logout = await showAlertDialog(
-                  context: context,
-                  title: AppLocalizations.of(context)!.areYouSure,
-                  cancelActionText: AppLocalizations.of(context)!.cancel,
-                  defaultActionText: AppLocalizations.of(context)!.logout);
-            },
+            onPressed: state.isLoading
+                ? null
+                : () async {
+                    final navigator = Navigator.of(context);
+                    final logout = await showAlertDialog(
+                      context: context,
+                      title: AppLocalizations.of(context)!.areYouSure,
+                      cancelActionText: AppLocalizations.of(context)!.cancel,
+                      defaultActionText: AppLocalizations.of(context)!.logout,
+                    );
+                    if (logout == true) {
+                      await ref
+                          .read(accountScreenControllerProvider.notifier)
+                          .signOut();
+                      navigator.pop();
+                    }
+                  },
           )
         ],
       ),
