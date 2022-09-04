@@ -1,27 +1,28 @@
+import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../common_widgets/action_text_button.dart';
 import '../../../../constants/breakpoints.dart';
-import '../../../authentication/models/app_user.dart';
 import '../../../../routing/app_router.dart';
 import 'more_menu_button.dart';
 import 'shopping_cart_icon.dart';
 
-class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
+class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
   const HomeAppBar({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    const user = AppUser(uid: '123', email: 'test@test.com');
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(authStateChangesProvider).value;
 
     final screenWidth = MediaQuery.of(context).size.width;
     if (screenWidth < Breakpoint.tablet) {
       return AppBar(
         title: Text(AppLocalizations.of(context)!.appBarTitle),
-        actions: const [
-          ShoppingCartIcon(),
+        actions: [
+          const ShoppingCartIcon(),
           MoreMenuButton(
             user: user,
           )

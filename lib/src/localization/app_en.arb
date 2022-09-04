@@ -6,6 +6,7 @@
         "description": "The title to be shown in the menu bar"
     },
     "ok": "OK",
+    "error": "Error",
     "anErrorOccurred": "An error occurred",
     "orders": "Orders",
     "account": "Account",

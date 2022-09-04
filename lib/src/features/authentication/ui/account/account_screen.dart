@@ -1,22 +1,25 @@
-import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
-import 'package:ecommerce_app/src/features/authentication/ui/account/account_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../common_widgets/action_text_button.dart';
 import '../../../../common_widgets/alert_dialogs.dart';
 import '../../../../common_widgets/responsive_center.dart';
 import '../../../../constants/app_sizes.dart';
 import '../../../../localization/app_localizations_of.dart';
-import '../../models/app_user.dart';
+import '../../../../utils/async_value_ui.dart';
+import '../../data/fake_auth_repository.dart';
+import 'account_screen_controller.dart';
 
 class AccountScreen extends ConsumerWidget {
   const AccountScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<AsyncValue<void>>(
+      accountScreenControllerProvider,
+      (_, state) => state.showAlertDialogOnError(context),
+    );
     final state = ref.watch(accountScreenControllerProvider);
     return Scaffold(
       appBar: AppBar(
@@ -37,10 +40,12 @@ class AccountScreen extends ConsumerWidget {
                       defaultActionText: AppLocalizations.of(context)!.logout,
                     );
                     if (logout == true) {
-                      await ref
+                      final isSuccess = await ref
                           .read(accountScreenControllerProvider.notifier)
                           .signOut();
-                      navigator.pop();
+                      if (isSuccess) {
+                        navigator.pop();
+                      }
                     }
                   },
           )
@@ -53,13 +58,13 @@ class AccountScreen extends ConsumerWidget {
   }
 }
 
-class UserDataTable extends StatelessWidget {
+class UserDataTable extends ConsumerWidget {
   const UserDataTable({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final style = Theme.of(context).textTheme.subtitle2!;
-    const user = AppUser(uid: '123', email: 'test@test.com');
+    final user = ref.watch(authStateChangesProvider).value;
     return DataTable(columns: [
       DataColumn(
         label: Text(
@@ -76,12 +81,12 @@ class UserDataTable extends StatelessWidget {
     ], rows: [
       _makeDataRow(
         context.localizations!.uidLowercase,
-        user.uid,
+        user?.uid ?? '',
         style,
       ),
       _makeDataRow(
         context.localizations!.emailLowercase,
-        user.email ?? '',
+        user?.email ?? '',
         style,
       )
     ]);
