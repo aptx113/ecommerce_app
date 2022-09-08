@@ -53,8 +53,7 @@ class _EmailPasswordSignInContentsState
 
   var _submitted = false;
 
-  late var _state =
-      EmailPasswordSignInState(formType: widget.formType, isLoading: false);
+  late var _state = EmailPasswordSignInState(formType: widget.formType);
 
   @override
   void dispose() {
