@@ -8,7 +8,7 @@ class InMemoryStore<T> {
 
   T get value => _subject.value;
 
-  set value(T value) => _subject.value;
+  set value(T value) => _subject.add(value);
 
   void close() => _subject.close();
 }
