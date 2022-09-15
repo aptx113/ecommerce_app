@@ -32,7 +32,6 @@ class AccountScreen extends ConsumerWidget {
             onPressed: state.isLoading
                 ? null
                 : () async {
-                    final navigator = Navigator.of(context);
                     final logout = await showAlertDialog(
                       context: context,
                       title: AppLocalizations.of(context)!.areYouSure,
@@ -40,12 +39,9 @@ class AccountScreen extends ConsumerWidget {
                       defaultActionText: AppLocalizations.of(context)!.logout,
                     );
                     if (logout == true) {
-                      final isSuccess = await ref
+                      ref
                           .read(accountScreenControllerProvider.notifier)
                           .signOut();
-                      if (isSuccess) {
-                        navigator.pop();
-                      }
                     }
                   },
           )

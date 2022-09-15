@@ -10,7 +10,6 @@ import '../../../../common_widgets/responsive_scrollable_card.dart';
 import '../../../../constants/app_sizes.dart';
 import '../../../../localization/app_localizations_of.dart';
 import '../../../../localization/string_hardcoded.dart';
-import '../../../../utils/async_value_ui.dart';
 import 'email_password_sign_in_controller.dart';
 import 'email_password_sign_in_state.dart';
 import 'string_validators.dart';
@@ -31,7 +30,6 @@ class EmailPasswordSignInScreen extends StatelessWidget {
       appBar: AppBar(title: Text('Sign In'.hardcoded)),
       body: EmailPasswordSignInContents(
         formType: formType,
-        onSignedIn: () => Navigator.of(context).pop(),
       ),
     );
   }
@@ -109,7 +107,8 @@ class _EmailPasswordSignInContentsState
   @override
   Widget build(BuildContext context) {
     ref.listen<AsyncValue>(
-        emailPasswordSignInControllerProvider(widget.formType).select((state) => state.value),
+        emailPasswordSignInControllerProvider(widget.formType)
+            .select((state) => state.value),
         (_, state) => state.value.showAlertDialogOnError(context));
     final state =
         ref.watch(emailPasswordSignInControllerProvider(widget.formType));

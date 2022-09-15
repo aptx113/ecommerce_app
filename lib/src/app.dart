@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'routing/app_router.dart';
 
 /// The Widget that configures your application.
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    // Glue the SettingsController to the MaterialApp.
-    // The AnimatedBuilder Widget listens to the SettingsController for changes.
-    // Whenever the user updates their settings, the MaterialApp is rebuilt.
+  Widget build(BuildContext context, WidgetRef ref) {
+    final goRouter = ref.watch(goRouterProvider);
     return MaterialApp.router(
       routerDelegate: goRouter.routerDelegate,
       routeInformationParser: goRouter.routeInformationParser,
