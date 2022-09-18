@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ignore: avoid_web_libraries_in_flutter
 
-import '../../../../localization/app_localizations_of.dart';
+import '../../../../localization/app_localizations_context.dart';
 import 'string_validators.dart';
 
 enum EmailPasswordSignInFormType { signIn, register }
@@ -57,7 +57,7 @@ class EmailPasswordSignInState with EmailAndPasswordValidators {
 extension EmailPasswordSignInStateX on EmailPasswordSignInState {
   String passwordLabelText(BuildContext context) {
     if (formType == EmailPasswordSignInFormType.register) {
-      return context.localizations!.password8CharactersLabel;
+      return context.loc!.password8CharactersLabel;
     } else {
       return AppLocalizations.of(context)!.passwordLabel;
     }
@@ -65,17 +65,17 @@ extension EmailPasswordSignInStateX on EmailPasswordSignInState {
 
   String primaryButtonText(BuildContext context) {
     if (formType == EmailPasswordSignInFormType.register) {
-      return context.localizations!.createAnAccount;
+      return context.loc!.createAnAccount;
     } else {
-      return context.localizations!.signIn;
+      return context.loc!.signIn;
     }
   }
 
   String secondaryButtonText(BuildContext context) {
     if (formType == EmailPasswordSignInFormType.register) {
-      return context.localizations!.haveAnAccount;
+      return context.loc!.haveAnAccount;
     } else {
-      return context.localizations!.needAnAccount;
+      return context.loc!.needAnAccount;
     }
   }
 
@@ -89,17 +89,17 @@ extension EmailPasswordSignInStateX on EmailPasswordSignInState {
 
   String errorAlertTitle(BuildContext context) {
     if (formType == EmailPasswordSignInFormType.register) {
-      return context.localizations!.registrationFailed;
+      return context.loc!.registrationFailed;
     } else {
-      return context.localizations!.signInFailed;
+      return context.loc!.signInFailed;
     }
   }
 
   String title(BuildContext context) {
     if (formType == EmailPasswordSignInFormType.register) {
-      return context.localizations!.register;
+      return context.loc!.register;
     } else {
-      return context.localizations!.signIn;
+      return context.loc!.signIn;
     }
   }
 
@@ -117,16 +117,16 @@ extension EmailPasswordSignInStateX on EmailPasswordSignInState {
   String? emailErrorText(String email, BuildContext context) {
     final bool showErrorText = !canSubmitEmail(email);
     final String errorText = email.isEmpty
-        ? context.localizations!.invalidEmailEmpty
-        : context.localizations!.invalidEmail;
+        ? context.loc!.invalidEmailEmpty
+        : context.loc!.invalidEmail;
     return showErrorText ? errorText : null;
   }
 
   String? passwordErrorText(String password, BuildContext context) {
     final bool showerrorText = !canSubmitPassword(password);
     final String errorText = password.isEmpty
-        ? context.localizations!.invalidPasswordEmpty
-        : context.localizations!.invalidPasswordTooShort;
+        ? context.loc!.invalidPasswordEmpty
+        : context.loc!.invalidPasswordTooShort;
     return showerrorText ? errorText : null;
   }
 }

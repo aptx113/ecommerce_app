@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../localization/app_localizations_of.dart';
+import '../../localization/app_localizations_context.dart';
 import '../authentication/ui/sign_in/email_password_sign_in_screen.dart';
 import '../authentication/ui/sign_in/email_password_sign_in_state.dart';
 import 'payment/payment_page.dart';
@@ -40,8 +40,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     final title = _subRoute == CheckoutSubRoute.register
-        ? context.localizations!.register
-        : context.localizations!.payment;
+        ? context.loc!.register
+        : context.loc!.payment;
 
     return Scaffold(
       appBar: AppBar(

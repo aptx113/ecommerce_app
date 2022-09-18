@@ -11,7 +11,7 @@ import '../../../../common_widgets/custom_image.dart';
 import '../../../../common_widgets/item_quantity_selector.dart';
 import '../../../../common_widgets/responsive_two_column_layout.dart';
 import '../../../../constants/app_sizes.dart';
-import '../../../../localization/app_localizations_of.dart';
+import '../../../../localization/app_localizations_context.dart';
 import '../../../products/data/fake_products_repository.dart';
 import '../../../products/models/product.dart';
 import '../../models/item.dart';
@@ -29,7 +29,6 @@ class ShoppingCartItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   
     final productValue = ref.watch(productStreamProvider(item.productId));
     return AsyncValueWidget<Product?>(
       value: productValue,
@@ -116,7 +115,7 @@ class ShoppingCartItemContents extends StatelessWidget {
               : Padding(
                   padding: const EdgeInsets.symmetric(vertical: Sizes.p8),
                   child: Text(
-                    context.localizations!.quantityValue(item.quantity),
+                    context.loc!.quantityValue(item.quantity),
                   ),
                 )
         ],

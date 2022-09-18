@@ -8,7 +8,7 @@ import '../../../../common_widgets/custom_text_button.dart';
 import '../../../../common_widgets/primary_button.dart';
 import '../../../../common_widgets/responsive_scrollable_card.dart';
 import '../../../../constants/app_sizes.dart';
-import '../../../../localization/app_localizations_of.dart';
+import '../../../../localization/app_localizations_context.dart';
 import '../../../../localization/string_hardcoded.dart';
 import 'email_password_sign_in_controller.dart';
 import 'email_password_sign_in_state.dart';
@@ -125,8 +125,8 @@ class _EmailPasswordSignInContentsState
                 key: EmailPasswordSignInScreen.emailKey,
                 controller: _emailController,
                 decoration: InputDecoration(
-                  labelText: context.localizations!.emailLabel,
-                  hintText: context.localizations!.emailHint,
+                  labelText: context.loc!.emailLabel,
+                  hintText: context.loc!.emailHint,
                   enabled: !state.isLoading,
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
