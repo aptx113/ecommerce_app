@@ -6,7 +6,7 @@ import '../../../../common_widgets/action_text_button.dart';
 import '../../../../common_widgets/alert_dialogs.dart';
 import '../../../../common_widgets/responsive_center.dart';
 import '../../../../constants/app_sizes.dart';
-import '../../../../localization/app_localizations_of.dart';
+import '../../../../localization/app_localizations_context.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../data/fake_auth_repository.dart';
 import 'account_screen_controller.dart';
@@ -25,10 +25,10 @@ class AccountScreen extends ConsumerWidget {
       appBar: AppBar(
         title: state.isLoading
             ? const CircularProgressIndicator()
-            : Text(context.localizations!.account),
+            : Text(context.loc!.account),
         actions: [
           ActionTextButton(
-            text: context.localizations!.logout,
+            text: context.loc!.logout,
             onPressed: state.isLoading
                 ? null
                 : () async {
@@ -64,24 +64,24 @@ class UserDataTable extends ConsumerWidget {
     return DataTable(columns: [
       DataColumn(
         label: Text(
-          context.localizations!.field,
+          context.loc!.field,
           style: style,
         ),
       ),
       DataColumn(
         label: Text(
-          context.localizations!.value,
+          context.loc!.value,
           style: style,
         ),
       )
     ], rows: [
       _makeDataRow(
-        context.localizations!.uidLowercase,
+        context.loc!.uidLowercase,
         user?.uid ?? '',
         style,
       ),
       _makeDataRow(
-        context.localizations!.emailLowercase,
+        context.loc!.emailLowercase,
         user?.email ?? '',
         style,
       )

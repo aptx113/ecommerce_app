@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../common_widgets/async_value_widget.dart';
 import '../../../common_widgets/custom_image.dart';
 import '../../../constants/app_sizes.dart';
-import '../../../localization/app_localizations_of.dart';
+import '../../../localization/app_localizations_context.dart';
 import '../../cart/models/item.dart';
 import '../../products/data/fake_products_repository.dart';
 import '../../products/models/product.dart';
@@ -41,7 +41,7 @@ class OrderItemListTile extends ConsumerWidget {
                   Text(product.title),
                   gapH12,
                   Text(
-                    context.localizations!.quantityValue(item.quantity),
+                    context.loc!.quantityValue(item.quantity),
                     style: Theme.of(context).textTheme.caption,
                   ),
                 ],

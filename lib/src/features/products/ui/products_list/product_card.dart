@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../common_widgets/custom_image.dart';
 import '../../../../constants/app_sizes.dart';
-import '../../../../localization/app_localizations_of.dart';
+import '../../../../localization/app_localizations_context.dart';
 import '../../../../utils/currency_formatter.dart';
 import '../../models/product.dart';
 import '../product_screen/product_average_rating.dart';
@@ -51,9 +51,8 @@ class ProductCard extends StatelessWidget {
               gapH4,
               Text(
                 product.availableQuantity <= 0
-                    ? context.localizations!.outOfStock
-                    : context.localizations!
-                        .quantityValue(product.availableQuantity),
+                    ? context.loc!.outOfStock
+                    : context.loc!.quantityValue(product.availableQuantity),
                 style: Theme.of(context).textTheme.caption,
               )
             ],

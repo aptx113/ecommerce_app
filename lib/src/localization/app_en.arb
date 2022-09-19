@@ -118,6 +118,7 @@
     "@payment": {
         "description": "Payment page title"
     },
+    "paymentFail": "Payment Failed",
     "cardPayment": "Card Payment",
     "saveCardDuringPayment": "Save card during payment",
     "devBuildTestingNotice": "[DEV build] Use 4242 4242 4242 4242 for testing",
