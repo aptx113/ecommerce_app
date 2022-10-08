@@ -8,13 +8,17 @@ import 'package:ecommerce_app/src/features/authentication/ui/account/account_scr
 class MockAuthRepository extends Mock implements FakeAuthRepository {}
 
 void main() {
+  late FakeAuthRepository authRepository;
+  late AccountScreenController controller;
+
+  setUp(() {
+    authRepository = MockAuthRepository();
+    controller = AccountScreenController(authRepository: authRepository);
+  });
   group(
     'AccountScreenController',
     () {
       test('initial state is AsyncValue.data', () {
-        final authRepository = FakeAuthRepository();
-        final controller =
-            AccountScreenController(authRepository: authRepository);
         verifyNever(authRepository.signOut);
         expect(controller.debugState, const AsyncData<void>(null));
       });
@@ -22,12 +26,9 @@ void main() {
       test(
         'signOut success',
         () async {
-          final authRepository = MockAuthRepository();
           when(authRepository.signOut).thenAnswer(
             (_) => Future.value(),
           );
-          final controller =
-              AccountScreenController(authRepository: authRepository);
           expectLater(
             controller.stream,
             emitsInOrder(const [AsyncLoading<void>(), AsyncData<void>(null)]),
@@ -42,11 +43,8 @@ void main() {
       test(
         'signOut failure',
         () async {
-          final authRepository = MockAuthRepository();
           final exception = Exception('Connection failed');
           when(authRepository.signOut).thenThrow(exception);
-          final controller =
-              AccountScreenController(authRepository: authRepository);
           expectLater(
               controller.stream,
               emitsInOrder([

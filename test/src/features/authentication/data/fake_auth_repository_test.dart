@@ -14,6 +14,7 @@ void main() {
   group("FakeAuthRepository", () {
     test('currentUser is null', () {
       final authRepository = FakeAuthRepository();
+      addTearDown(authRepository.dispose);
       expect(authRepository.currentUser, null);
       expect(authRepository.authStateChanges(), emits(null));
     });
