@@ -6,11 +6,11 @@ import '../../data/fake_auth_repository.dart';
 // Controller acts like ViewModel in MVVM
 class AccountScreenController extends StateNotifier<AsyncValue<void>> {
   AccountScreenController({required this.authRepository})
-      : super(const AsyncValue<void>.data(null));
+      : super(const AsyncData(null));
   final AuthRepository authRepository;
 
   Future<void> signOut() async {
-    state = const AsyncValue<void>.loading();
+    state = const AsyncLoading();
     state = await AsyncValue.guard(() => authRepository.signOut());
   }
 }
