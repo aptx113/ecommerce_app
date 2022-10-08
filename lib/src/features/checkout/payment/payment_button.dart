@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../localization/string_hardcoded.dart';
 
 class PaymentButton extends StatelessWidget {
-  const PaymentButton({Key? key}) : super(key: key);
+  const PaymentButton({super.key});
 
   Future<void> _pay(BuildContext context) async {
     showNotImplementedAlertDialog(context: context);

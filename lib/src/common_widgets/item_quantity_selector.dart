@@ -5,12 +5,12 @@ import '../constants/app_sizes.dart';
 
 class ItemQuantitySelector extends StatelessWidget {
   const ItemQuantitySelector({
-    Key? key,
+    super.key,
     required this.quantity,
     required this.maxQuantity,
     this.itemIndex,
     this.onChanged,
-  }) : super(key: key);
+  });
   final int quantity;
   final int maxQuantity;
   final int? itemIndex;

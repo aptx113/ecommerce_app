@@ -12,9 +12,9 @@ import '../../../../utils/date_formatter.dart';
 
 class LeaveReviewAction extends StatelessWidget {
   const LeaveReviewAction({
-    Key? key,
+    super.key,
     required this.productId,
-  }) : super(key: key);
+  });
   final String productId;
 
   @override

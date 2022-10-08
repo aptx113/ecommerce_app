@@ -4,11 +4,11 @@ import '../constants/app_sizes.dart';
 
 class CustomTextButton extends StatelessWidget {
   const CustomTextButton({
-    Key? key,
+    super.key,
     required this.text,
     this.style,
     this.onPressed,
-  }) : super(key: key);
+  });
   final String text;
   final TextStyle? style;
   final VoidCallback? onPressed;

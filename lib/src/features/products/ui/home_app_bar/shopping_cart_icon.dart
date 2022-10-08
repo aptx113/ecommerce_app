@@ -6,7 +6,7 @@ import '../../../../constants/app_sizes.dart';
 import '../../../../routing/app_router.dart';
 
 class ShoppingCartIcon extends StatelessWidget {
-  const ShoppingCartIcon({Key? key}) : super(key: key);
+  const ShoppingCartIcon({super.key});
 
   static const shoppingCartIconKey = Key('shopping-cart');
 
@@ -35,9 +35,9 @@ class ShoppingCartIcon extends StatelessWidget {
 
 class ShoppingCartIconBadge extends StatelessWidget {
   const ShoppingCartIconBadge({
-    Key? key,
+    super.key,
     required this.itemCount,
-  }) : super(key: key);
+  });
   final int itemCount;
 
   @override

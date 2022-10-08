@@ -15,7 +15,7 @@ enum PopupMenuOption {
 }
 
 class MoreMenuButton extends StatelessWidget {
-  const MoreMenuButton({Key? key, this.user}) : super(key: key);
+  const MoreMenuButton({super.key, this.user});
   final AppUser? user;
 
   static const signInKey = Key('menuSignIn');

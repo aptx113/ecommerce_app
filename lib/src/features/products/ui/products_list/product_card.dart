@@ -10,10 +10,10 @@ import '../product_screen/product_average_rating.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    Key? key,
+    super.key,
     required this.product,
     this.onPressed,
-  }) : super(key: key);
+  });
   final Product product;
   final VoidCallback? onPressed;
 

@@ -9,9 +9,9 @@ import '../routing/app_router.dart';
 
 class EmptyPlaceholderWidget extends StatelessWidget {
   const EmptyPlaceholderWidget({
-    Key? key,
+    super.key,
     required this.message,
-  }) : super(key: key);
+  });
   final String message;
 
   @override

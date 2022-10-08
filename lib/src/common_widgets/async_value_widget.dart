@@ -6,10 +6,10 @@ import 'error_message_widget.dart';
 
 class AsyncValueWidget<T> extends StatelessWidget {
   const AsyncValueWidget({
-    Key? key,
+    super.key,
     required this.value,
     required this.data,
-  }) : super(key: key);
+  });
 
   final AsyncValue<T> value;
   final Widget Function(T) data;

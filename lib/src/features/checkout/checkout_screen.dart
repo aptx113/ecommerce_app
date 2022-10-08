@@ -8,7 +8,7 @@ import 'payment/payment_page.dart';
 enum CheckoutSubRoute { register, payment }
 
 class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({Key? key}) : super(key: key);
+  const CheckoutScreen({super.key});
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();

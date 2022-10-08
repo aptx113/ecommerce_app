@@ -12,7 +12,7 @@ import '../../data/fake_auth_repository.dart';
 import 'account_screen_controller.dart';
 
 class AccountScreen extends ConsumerWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -55,7 +55,7 @@ class AccountScreen extends ConsumerWidget {
 }
 
 class UserDataTable extends ConsumerWidget {
-  const UserDataTable({Key? key}) : super(key: key);
+  const UserDataTable({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

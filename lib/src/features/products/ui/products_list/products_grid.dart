@@ -14,7 +14,7 @@ import '../../models/product.dart';
 import 'product_card.dart';
 
 class ProductsGrid extends ConsumerWidget {
-  const ProductsGrid({Key? key}) : super(key: key);
+  const ProductsGrid({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -47,10 +47,10 @@ class ProductsGrid extends ConsumerWidget {
 
 class ProductsLayoutGrid extends StatelessWidget {
   const ProductsLayoutGrid({
-    Key? key,
+    super.key,
     required this.itemCount,
     required this.itemBuilder,
-  }) : super(key: key);
+  });
 
   final int itemCount;
   final Widget Function(BuildContext, int) itemBuilder;

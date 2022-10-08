@@ -9,7 +9,7 @@ import 'shopping_cart_item.dart';
 import 'shopping_cart_item_builder.dart';
 
 class ShoppingCartScreen extends StatelessWidget {
-  const ShoppingCartScreen({Key? key}) : super(key: key);
+  const ShoppingCartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

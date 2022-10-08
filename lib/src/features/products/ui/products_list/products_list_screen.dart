@@ -7,7 +7,7 @@ import 'products_grid.dart';
 import 'products_search_text_field.dart';
 
 class ProductsListScreen extends StatefulWidget {
-  const ProductsListScreen({Key? key}) : super(key: key);
+  const ProductsListScreen({super.key});
 
   @override
   State<ProductsListScreen> createState() => _ProductsListScreenState();

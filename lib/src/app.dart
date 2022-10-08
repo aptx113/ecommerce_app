@@ -6,8 +6,8 @@ import 'routing/app_router.dart';
 /// The Widget that configures your application.
 class MyApp extends ConsumerWidget {
   const MyApp({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,8 +31,7 @@ class MyApp extends ConsumerWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            primary: Colors.black,
-            onPrimary: Colors.white,
+            foregroundColor: Colors.white, backgroundColor: Colors.black,
           ),
         ),
       ),

@@ -9,8 +9,8 @@ import 'product_rating_bar.dart';
 class ProductReviewCard extends StatelessWidget {
   const ProductReviewCard(
     this.review, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final Review review;
   @override
   Widget build(BuildContext context) {

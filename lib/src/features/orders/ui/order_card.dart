@@ -12,9 +12,9 @@ import 'order_status_label.dart';
 
 class OrderCard extends StatelessWidget {
   const OrderCard({
-    Key? key,
+    super.key,
     required this.order,
-  }) : super(key: key);
+  });
   final Order order;
 
   @override
@@ -43,9 +43,9 @@ class OrderCard extends StatelessWidget {
 
 class OrderHeader extends StatelessWidget {
   const OrderHeader({
-    Key? key,
+    super.key,
     required this.order,
-  }) : super(key: key);
+  });
   final Order order;
 
   @override
@@ -93,9 +93,9 @@ class OrderHeader extends StatelessWidget {
 
 class OrderItemsList extends StatelessWidget {
   const OrderItemsList({
-    Key? key,
+    super.key,
     required this.order,
-  }) : super(key: key);
+  });
   final Order order;
 
   @override

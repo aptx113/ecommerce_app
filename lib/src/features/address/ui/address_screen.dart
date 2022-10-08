@@ -7,7 +7,7 @@ import '../../../constants/app_sizes.dart';
 import '../../../localization/app_localizations_context.dart';
 
 class AddressScreen extends StatefulWidget {
-  const AddressScreen({Key? key, this.onSubmit}) : super(key: key);
+  const AddressScreen({super.key, this.onSubmit});
   final VoidCallback? onSubmit;
 
   static const addressKey = Key('address');
@@ -112,13 +112,13 @@ class _AddressScreenState extends State<AddressScreen> {
 
 class AddressFormField extends StatelessWidget {
   const AddressFormField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.labelText,
     this.keyboardType,
     this.enabled = true,
     this.formFieldKey,
-  }) : super(key: key);
+  });
 
   final TextEditingController controller;
   final String labelText;

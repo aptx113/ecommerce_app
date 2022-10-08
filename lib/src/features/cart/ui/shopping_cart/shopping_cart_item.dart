@@ -18,11 +18,11 @@ import '../../models/item.dart';
 
 class ShoppingCartItem extends ConsumerWidget {
   const ShoppingCartItem({
-    Key? key,
+    super.key,
     required this.item,
     required this.itemIndex,
     this.isEditable = true,
-  }) : super(key: key);
+  });
   final Item item;
   final int itemIndex;
   final bool isEditable;
@@ -52,12 +52,12 @@ class ShoppingCartItem extends ConsumerWidget {
 
 class ShoppingCartItemContents extends StatelessWidget {
   const ShoppingCartItemContents({
-    Key? key,
+    super.key,
     required this.product,
     required this.item,
     required this.itemIndex,
     required this.isEditable,
-  }) : super(key: key);
+  });
   final Product product;
   final Item item;
   final int itemIndex;

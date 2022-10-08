@@ -16,9 +16,9 @@ import 'string_validators.dart';
 
 class EmailPasswordSignInScreen extends StatelessWidget {
   const EmailPasswordSignInScreen({
-    Key? key,
+    super.key,
     required this.formType,
-  }) : super(key: key);
+  });
   final EmailPasswordSignInFormType formType;
 
   static const emailKey = Key('email');
@@ -37,10 +37,10 @@ class EmailPasswordSignInScreen extends StatelessWidget {
 
 class EmailPasswordSignInContents extends ConsumerStatefulWidget {
   const EmailPasswordSignInContents({
-    Key? key,
+    super.key,
     this.onSignedIn,
     required this.formType,
-  }) : super(key: key);
+  });
 
   final VoidCallback? onSignedIn;
   final EmailPasswordSignInFormType formType;

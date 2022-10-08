@@ -6,9 +6,9 @@ import '../../models/product.dart';
 
 class ProductAverageRating extends StatelessWidget {
   const ProductAverageRating({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
   final Product product;
 
   @override

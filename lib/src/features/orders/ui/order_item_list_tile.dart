@@ -12,9 +12,9 @@ import '../../products/models/product.dart';
 
 class OrderItemListTile extends ConsumerWidget {
   const OrderItemListTile({
-    Key? key,
+    super.key,
     required this.item,
-  }) : super(key: key);
+  });
   final Item item;
 
   @override
