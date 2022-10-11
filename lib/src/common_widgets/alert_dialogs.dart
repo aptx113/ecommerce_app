@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 import '../localization/string_hardcoded.dart';
 
+const dialogLogoutButtonKey = Key('dialog-logout-button-key');
+
 Future<bool?> showAlertDialog({
   required BuildContext context,
   required String title,
@@ -26,6 +28,7 @@ Future<bool?> showAlertDialog({
               child: Text(cancelActionText),
             ),
           TextButton(
+            key: dialogLogoutButtonKey,
             onPressed: () => Navigator.of(context).pop(true),
             child: Text(defaultActionText),
           )
@@ -45,6 +48,7 @@ Future<bool?> showAlertDialog({
             onPressed: () => Navigator.of(context).pop(false),
           ),
         CupertinoDialogAction(
+          key: dialogLogoutButtonKey,
           child: Text(defaultActionText),
           onPressed: () => Navigator.of(context).pop(true),
         ),

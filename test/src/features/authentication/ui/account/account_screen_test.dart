@@ -1,23 +1,64 @@
-import 'package:ecommerce_app/src/features/authentication/ui/account/account_screen.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ecommerce_app/src/features/authentication/models/app_user.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
-import '../../../../localization/testable_localizations_widget.dart';
+import '../../../../mocks.dart';
+import '../../auth_robot.dart';
 
 void main() {
   testWidgets('Cancel logout', (tester) async {
-    await tester.pumpWidget(const ProviderScope(
-        child: TestableLocalizationsWidget(child: AccountScreen())));
-    final logoutButton = find.text('Logout');
-    expect(logoutButton, findsOneWidget);
-    await tester.tap(logoutButton);
-    await tester.pump();
-    final dialogTitle = find.text('Are you sure?');
-    expect(dialogTitle, findsOneWidget);
-    final cancelButton = find.text('Cancel');
-    expect(cancelButton, findsOneWidget);
-    await tester.tap(cancelButton);
-    await tester.pump();
-    expect(dialogTitle, findsNothing);
+    final robot = AuthRobot(tester);
+    await robot.pumpAccountScreen();
+    await robot.tapLogoutButton();
+    robot.expectLogoutDialogFound();
+    await robot.tapCancelButton();
+    robot.expectLogoutDialogNotFound();
+  });
+
+  testWidgets('Confirm logout success', (tester) async {
+    final robot = AuthRobot(tester);
+    await robot.pumpAccountScreen();
+    await robot.tapLogoutButton();
+    robot.expectLogoutDialogFound();
+    await robot.tapDialogLogoutButton();
+    robot.expectLogoutDialogNotFound();
+    robot.expectErrorAlertNotFound();
+  });
+
+  testWidgets('Confirm logout, failure', (tester) async {
+    final robot = AuthRobot(tester);
+    final authRepository = MockAuthRepository();
+    final exception = Exception('Connection Failed');
+    when(authRepository.signOut).thenThrow(exception);
+    when(authRepository.authStateChanges).thenAnswer(
+      (_) => Stream.value(
+        const AppUser(uid: '123', email: 'test@test.com'),
+      ),
+    );
+    await robot.pumpAccountScreen(authRepository: authRepository);
+    await robot.tapLogoutButton();
+    robot.expectLogoutDialogFound();
+    await robot.tapDialogLogoutButton();
+    robot.expectErrorAlertFound();
+  });
+
+  testWidgets('Confirm logout, loading state', (tester) async {
+    final robot = AuthRobot(tester);
+    final authRepository = MockAuthRepository();
+    when(authRepository.signOut).thenAnswer(
+      (_) => Future.delayed(const Duration(seconds: 1)),
+    );
+    when(authRepository.authStateChanges).thenAnswer(
+      (_) => Stream.value(
+        const AppUser(uid: '123', email: 'test@test.com'),
+      ),
+    );
+    await robot.pumpAccountScreen(authRepository: authRepository);
+    await tester.runAsync(() async {
+      await robot.tapLogoutButton();
+      robot.expectLogoutDialogFound();
+      await robot.tapDialogLogoutButton();
+    });
+    robot.expectCircularProgressIndicator();
   });
 }

@@ -61,7 +61,7 @@ class _AddressScreenState extends State<AddressScreen> {
             AddressFormField(
               formFieldKey: AddressScreen.addressKey,
               controller: _addressController,
-              labelText: context.loc!.address,
+              labelText: context.loc.address,
               keyboardType: TextInputType.streetAddress,
               enabled: !_isLoading,
             ),
@@ -69,7 +69,7 @@ class _AddressScreenState extends State<AddressScreen> {
             AddressFormField(
               formFieldKey: AddressScreen.townCityKey,
               controller: _cityController,
-              labelText: context.loc!.townCity,
+              labelText: context.loc.townCity,
               keyboardType: TextInputType.streetAddress,
               enabled: !_isLoading,
             ),
@@ -77,7 +77,7 @@ class _AddressScreenState extends State<AddressScreen> {
             AddressFormField(
               formFieldKey: AddressScreen.stateKey,
               controller: _stateController,
-              labelText: context.loc!.state,
+              labelText: context.loc.state,
               keyboardType: TextInputType.streetAddress,
               enabled: !_isLoading,
             ),
@@ -85,7 +85,7 @@ class _AddressScreenState extends State<AddressScreen> {
             AddressFormField(
               formFieldKey: AddressScreen.postalCodeKey,
               controller: _postalCodeController,
-              labelText: context.loc!.postalCode,
+              labelText: context.loc.postalCode,
               keyboardType: TextInputType.streetAddress,
               enabled: !_isLoading,
             ),
@@ -93,13 +93,13 @@ class _AddressScreenState extends State<AddressScreen> {
             AddressFormField(
               formFieldKey: AddressScreen.countryKey,
               controller: _countryController,
-              labelText: context.loc!.country,
+              labelText: context.loc.country,
               keyboardType: TextInputType.streetAddress,
               enabled: !_isLoading,
             ),
             gapH8,
             PrimaryButton(
-              text: context.loc!.submit,
+              text: context.loc.submit,
               onPressed: _submit,
               isLoading: _isLoading,
             )
@@ -140,7 +140,7 @@ class AddressFormField extends StatelessWidget {
       keyboardType: keyboardType,
       keyboardAppearance: Brightness.light,
       validator: (value) =>
-          value?.isNotEmpty == true ? null : context.loc!.cantBeEmpty,
+          value?.isNotEmpty == true ? null : context.loc.cantBeEmpty,
     );
   }
 }
