@@ -11,7 +11,7 @@ class NotFoundScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: EmptyPlaceholderWidget(
-        message: AppLocalizations.of(context)!.notFound404,
+        message: AppLocalizations.of(context).notFound404,
       ),
     );
   }
