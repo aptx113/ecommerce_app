@@ -8,7 +8,7 @@ extension AsyncValueUI on AsyncValue {
   void showAlertDialogOnError(BuildContext context) {
     if (!isRefreshing && hasError) {
       showExceptionAlertDialog(
-          context: context, title: context.loc!.error, exception: error);
+          context: context, title: context.loc.error, exception: error);
     }
   }
 }

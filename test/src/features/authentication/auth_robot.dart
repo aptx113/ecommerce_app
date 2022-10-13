@@ -1,15 +1,76 @@
-import 'package:ecommerce_app/src/common_widgets/alert_dialogs.dart';
-import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
-import 'package:ecommerce_app/src/features/authentication/ui/account/account_screen.dart';
+import 'package:ecommerce_app/src/features/products/ui/home_app_bar/more_menu_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'package:ecommerce_app/src/common_widgets/alert_dialogs.dart';
+import 'package:ecommerce_app/src/common_widgets/primary_button.dart';
+import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
+import 'package:ecommerce_app/src/features/authentication/ui/account/account_screen.dart';
+import 'package:ecommerce_app/src/features/authentication/ui/sign_in/email_password_sign_in_screen.dart';
+import 'package:ecommerce_app/src/features/authentication/ui/sign_in/email_password_sign_in_state.dart';
 
 import '../../localization/testable_localizations_widget.dart';
 
 class AuthRobot {
   AuthRobot(this.tester);
   final WidgetTester tester;
+
+  Future<void> openEmailPasswordSignInScreen() async {
+    final finder = find.byKey(MoreMenuButton.signInKey);
+    expect(finder, findsOneWidget);
+    await tester.tap(finder);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> pumpEmailPasswordSignInContents(
+      {required FakeAuthRepository authRepository,
+      required EmailPasswordSignInFormType formType,
+      VoidCallback? onSignedIn}) {
+    return tester.pumpWidget(
+      ProviderScope(
+        overrides: [authRepositoryProvider.overrideWithValue(authRepository)],
+        child: TestableLocalizationsWidget(
+          child: EmailPasswordSignInContents(
+            formType: formType,
+            onSignedIn: onSignedIn,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> tapEmailAndPasswordSubmitButton() async {
+    final primaryButton = find.byType(PrimaryButton);
+    expect(primaryButton, findsOneWidget);
+    await tester.tap(primaryButton);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> enterEmail(String email) async {
+    final emailField = find.byKey(EmailPasswordSignInScreen.emailKey);
+    expect(emailField, findsOneWidget);
+    await tester.enterText(emailField, email);
+  }
+
+  Future<void> enterPassword(String password) async {
+    final passwordField = find.byKey(EmailPasswordSignInScreen.passwordKey);
+    expect(passwordField, findsOneWidget);
+    await tester.enterText(passwordField, password);
+  }
+
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
+    await enterEmail(email);
+    await enterPassword(password);
+    await tapEmailAndPasswordSubmitButton();
+  }
+
+  Future<void> openAccountScreen() async {
+    final finder = find.byKey(MoreMenuButton.accountKey);
+    expect(finder, findsOneWidget);
+    await tester.tap(finder);
+    await tester.pumpAndSettle();
+  }
 
   Future<void> pumpAccountScreen({AuthRepository? authRepository}) async {
     await tester.pumpWidget(ProviderScope(overrides: [
