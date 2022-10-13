@@ -1,18 +1,23 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+
 import 'package:ecommerce_app/src/app.dart';
 import 'package:ecommerce_app/src/constants/test_products.dart';
 import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
 import 'package:ecommerce_app/src/features/products/data/fake_products_repository.dart';
 import 'package:ecommerce_app/src/features/products/ui/home_app_bar/more_menu_button.dart';
 import 'package:ecommerce_app/src/features/products/ui/products_list/product_card.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 import 'features/authentication/auth_robot.dart';
+import 'goldens/golden_robot.dart';
 
 class Robot {
-  Robot(this.tester) : auth = AuthRobot(tester);
+  Robot(this.tester)
+      : auth = AuthRobot(tester),
+        golden = GoldenRobot(tester);
   final WidgetTester tester;
   final AuthRobot auth;
+  final GoldenRobot golden;
 
   Future<void> pumpMyApp() async {
     final productsRepository = FakeProductsRepository(addDelay: false);
