@@ -12,6 +12,7 @@ import '../features/orders/ui/orders_list_screen.dart';
 import '../features/products/ui/product_screen/product_screen.dart';
 import '../features/products/ui/products_list/products_list_screen.dart';
 import '../features/reviews/ui/leave_review_screen/leave_review_screen.dart';
+import 'go_router_refresh_stream.dart';
 import 'not_found_screen.dart';
 
 enum AppRoute {
@@ -33,7 +34,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: '/',
     debugLogDiagnostics: true,
-    redirect: (state) {
+    redirect: (context, state) {
       final isLoggedIn = authRepository.currentUser != null;
       if (isLoggedIn) {
         if (state.location == AppRoute.signIn.location) {

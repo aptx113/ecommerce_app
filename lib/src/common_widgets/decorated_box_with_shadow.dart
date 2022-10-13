@@ -6,9 +6,9 @@ import '../constants/app_sizes.dart';
 /// screen on mobile. Useful for pinning CTAs such as checkout buttons etc.
 class DecoratedBoxWithShadow extends StatelessWidget {
   const DecoratedBoxWithShadow({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
   final Widget child;
 
   @override

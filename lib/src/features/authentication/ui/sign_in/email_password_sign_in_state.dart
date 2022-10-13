@@ -57,25 +57,25 @@ class EmailPasswordSignInState with EmailAndPasswordValidators {
 extension EmailPasswordSignInStateX on EmailPasswordSignInState {
   String passwordLabelText(BuildContext context) {
     if (formType == EmailPasswordSignInFormType.register) {
-      return context.loc!.password8CharactersLabel;
+      return context.loc.password8CharactersLabel;
     } else {
-      return AppLocalizations.of(context)!.passwordLabel;
+      return AppLocalizations.of(context).passwordLabel;
     }
   }
 
   String primaryButtonText(BuildContext context) {
     if (formType == EmailPasswordSignInFormType.register) {
-      return context.loc!.createAnAccount;
+      return context.loc.createAnAccount;
     } else {
-      return context.loc!.signIn;
+      return context.loc.signIn;
     }
   }
 
   String secondaryButtonText(BuildContext context) {
     if (formType == EmailPasswordSignInFormType.register) {
-      return context.loc!.haveAnAccount;
+      return context.loc.haveAnAccount;
     } else {
-      return context.loc!.needAnAccount;
+      return context.loc.needAnAccount;
     }
   }
 
@@ -89,17 +89,17 @@ extension EmailPasswordSignInStateX on EmailPasswordSignInState {
 
   String errorAlertTitle(BuildContext context) {
     if (formType == EmailPasswordSignInFormType.register) {
-      return context.loc!.registrationFailed;
+      return context.loc.registrationFailed;
     } else {
-      return context.loc!.signInFailed;
+      return context.loc.signInFailed;
     }
   }
 
   String title(BuildContext context) {
     if (formType == EmailPasswordSignInFormType.register) {
-      return context.loc!.register;
+      return context.loc.register;
     } else {
-      return context.loc!.signIn;
+      return context.loc.signIn;
     }
   }
 
@@ -117,16 +117,16 @@ extension EmailPasswordSignInStateX on EmailPasswordSignInState {
   String? emailErrorText(String email, BuildContext context) {
     final bool showErrorText = !canSubmitEmail(email);
     final String errorText = email.isEmpty
-        ? context.loc!.invalidEmailEmpty
-        : context.loc!.invalidEmail;
+        ? context.loc.invalidEmailEmpty
+        : context.loc.invalidEmail;
     return showErrorText ? errorText : null;
   }
 
   String? passwordErrorText(String password, BuildContext context) {
     final bool showerrorText = !canSubmitPassword(password);
     final String errorText = password.isEmpty
-        ? context.loc!.invalidPasswordEmpty
-        : context.loc!.invalidPasswordTooShort;
+        ? context.loc.invalidPasswordEmpty
+        : context.loc.invalidPasswordTooShort;
     return showerrorText ? errorText : null;
   }
 }

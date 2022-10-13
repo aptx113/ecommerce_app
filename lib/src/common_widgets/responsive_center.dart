@@ -10,11 +10,11 @@ import '../constants/breakpoints.dart';
 /// available width.
 class ResponsiveCenter extends StatelessWidget {
   const ResponsiveCenter({
-    Key? key,
+    super.key,
     this.maxContentWidth = Breakpoint.desktop,
     this.padding = EdgeInsets.zero,
     required this.child,
-  }) : super(key: key);
+  });
   final double maxContentWidth;
   final EdgeInsetsGeometry padding;
   final Widget child;
@@ -35,11 +35,11 @@ class ResponsiveCenter extends StatelessWidget {
 
 class ResponsiveSliverCenter extends StatelessWidget {
   const ResponsiveSliverCenter({
-    Key? key,
+    super.key,
     this.maxContentWidth = Breakpoint.desktop,
     this.padding = EdgeInsets.zero,
     required this.child,
-  }) : super(key: key);
+  });
   final double maxContentWidth;
   final EdgeInsetsGeometry padding;
   final Widget child;

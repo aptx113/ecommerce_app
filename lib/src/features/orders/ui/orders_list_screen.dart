@@ -7,7 +7,7 @@ import '../models/order.dart';
 import 'order_card.dart';
 
 class OrdersListScreen extends StatelessWidget {
-  const OrdersListScreen({Key? key}) : super(key: key);
+  const OrdersListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

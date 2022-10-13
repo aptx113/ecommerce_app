@@ -12,11 +12,11 @@ import '../cart_total/cart_total_with_call_to_action.dart';
 
 class ShoppingCartItemsBuilder extends StatelessWidget {
   const ShoppingCartItemsBuilder({
-    Key? key,
+    super.key,
     required this.items,
     required this.itemBuilder,
     required this.ctaBuilder,
-  }) : super(key: key);
+  });
   final List<Item> items;
   final Widget Function(BuildContext, Item, int) itemBuilder;
   final WidgetBuilder ctaBuilder;

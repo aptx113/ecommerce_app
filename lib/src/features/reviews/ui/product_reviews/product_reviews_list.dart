@@ -9,9 +9,9 @@ import 'product_review_card.dart';
 
 class ProductReviewsList extends StatelessWidget {
   const ProductReviewsList({
-    Key? key,
+    super.key,
     required this.productId,
-  }) : super(key: key);
+  });
   final String productId;
   @override
   Widget build(BuildContext context) {

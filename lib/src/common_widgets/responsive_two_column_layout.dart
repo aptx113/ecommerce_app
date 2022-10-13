@@ -7,7 +7,7 @@ import '../constants/breakpoints.dart';
 /// enough space, or vertically stacked if there is not enough space.
 class ResponsiveTwoColumnLayout extends StatelessWidget {
   const ResponsiveTwoColumnLayout({
-    Key? key,
+    super.key,
     required this.startContent,
     required this.endContent,
     this.startFlex = 1,
@@ -18,7 +18,7 @@ class ResponsiveTwoColumnLayout extends StatelessWidget {
     this.rowCrossAxisAligment = CrossAxisAlignment.start,
     this.columnMainAxisAligment = MainAxisAlignment.start,
     this.columnCrossAxisAligment = CrossAxisAlignment.stretch,
-  }) : super(key: key);
+  });
   final Widget startContent;
   final Widget endContent;
   final int startFlex;

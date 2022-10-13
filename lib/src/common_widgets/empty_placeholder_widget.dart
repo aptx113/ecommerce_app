@@ -9,9 +9,9 @@ import '../routing/app_router.dart';
 
 class EmptyPlaceholderWidget extends StatelessWidget {
   const EmptyPlaceholderWidget({
-    Key? key,
+    super.key,
     required this.message,
-  }) : super(key: key);
+  });
   final String message;
 
   @override
@@ -31,7 +31,7 @@ class EmptyPlaceholderWidget extends StatelessWidget {
             gapH32,
             PrimaryButton(
               onPressed: () => context.goNamed(AppRoute.home.name),
-              text: AppLocalizations.of(context)!.goHome,
+              text: AppLocalizations.of(context).goHome,
             )
           ],
         ),

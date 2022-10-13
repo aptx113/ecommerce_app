@@ -6,9 +6,9 @@ import 'cart_total_text.dart';
 
 class CartTotalWithCallToAction extends StatelessWidget {
   const CartTotalWithCallToAction({
-    Key? key,
+    super.key,
     required this.ctaBuilder,
-  }) : super(key: key);
+  });
   final WidgetBuilder ctaBuilder;
 
   @override

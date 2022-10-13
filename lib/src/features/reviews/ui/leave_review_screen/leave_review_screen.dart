@@ -12,9 +12,9 @@ import '../product_reviews/product_rating_bar.dart';
 
 class LeaveReviewScreen extends StatelessWidget {
   const LeaveReviewScreen({
-    Key? key,
+    super.key,
     required this.productId,
-  }) : super(key: key);
+  });
 
   final String productId;
 
@@ -38,8 +38,7 @@ class LeaveReviewScreen extends StatelessWidget {
 }
 
 class LeaveReviewForm extends StatefulWidget {
-  const LeaveReviewForm({Key? key, required this.productId, this.review})
-      : super(key: key);
+  const LeaveReviewForm({super.key, required this.productId, this.review});
   final String productId;
   final Review? review;
 

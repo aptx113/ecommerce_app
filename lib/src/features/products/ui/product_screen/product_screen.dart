@@ -20,9 +20,9 @@ import 'product_average_rating.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({
-    Key? key,
+    super.key,
     required this.productId,
-  }) : super(key: key);
+  });
   final String productId;
 
   @override
@@ -59,7 +59,7 @@ class ProductScreen extends StatelessWidget {
 }
 
 class ProductDetails extends StatelessWidget {
-  const ProductDetails({Key? key, required this.product}) : super(key: key);
+  const ProductDetails({super.key, required this.product});
   final Product product;
 
   @override

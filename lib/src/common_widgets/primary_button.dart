@@ -5,11 +5,11 @@ import '../constants/app_sizes.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
-    Key? key,
+    super.key,
     required this.text,
     this.isLoading = false,
     this.onPressed,
-  }) : super(key: key);
+  });
   final String text;
   final bool isLoading;
   final VoidCallback? onPressed;

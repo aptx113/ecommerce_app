@@ -6,9 +6,9 @@ import '../models/order.dart';
 
 class OrderStatusLabel extends StatelessWidget {
   const OrderStatusLabel({
-    Key? key,
+    super.key,
     required this.order,
-  }) : super(key: key);
+  });
   final Order order;
 
   @override

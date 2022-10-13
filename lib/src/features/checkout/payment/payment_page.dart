@@ -6,7 +6,7 @@ import '../../cart/ui/shopping_cart/shopping_cart_item_builder.dart';
 import 'payment_button.dart';
 
 class PaymentPage extends StatelessWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+  const PaymentPage({super.key});
 
   @override
   Widget build(BuildContext context) {

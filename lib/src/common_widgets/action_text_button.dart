@@ -4,10 +4,10 @@ import '../constants/app_sizes.dart';
 
 class ActionTextButton extends StatelessWidget {
   const ActionTextButton({
-    Key? key,
+    super.key,
     required this.text,
     this.onPressed,
-  }) : super(key: key);
+  });
   final String text;
   final VoidCallback? onPressed;
   @override

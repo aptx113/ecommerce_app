@@ -4,12 +4,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ProductRatingBar extends StatelessWidget {
   const ProductRatingBar({
-    Key? key,
+    super.key,
     this.initialRating = 0.0,
     this.itemSize = 40,
     this.ignoreGesture = false,
     required this.onRatingUpdate,
-  }) : super(key: key);
+  });
 
   final double initialRating;
   final double itemSize;

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:ecommerce_app/src/utils/async_value_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,9 +17,9 @@ import 'string_validators.dart';
 
 class EmailPasswordSignInScreen extends StatelessWidget {
   const EmailPasswordSignInScreen({
-    Key? key,
+    super.key,
     required this.formType,
-  }) : super(key: key);
+  });
   final EmailPasswordSignInFormType formType;
 
   static const emailKey = Key('email');
@@ -37,10 +38,10 @@ class EmailPasswordSignInScreen extends StatelessWidget {
 
 class EmailPasswordSignInContents extends ConsumerStatefulWidget {
   const EmailPasswordSignInContents({
-    Key? key,
+    super.key,
     this.onSignedIn,
     required this.formType,
-  }) : super(key: key);
+  });
 
   final VoidCallback? onSignedIn;
   final EmailPasswordSignInFormType formType;
@@ -109,7 +110,7 @@ class _EmailPasswordSignInContentsState
     ref.listen<AsyncValue>(
         emailPasswordSignInControllerProvider(widget.formType)
             .select((state) => state.value),
-        (_, state) => state.value.showAlertDialogOnError(context));
+        (_, state) => state.showAlertDialogOnError(context));
     final state =
         ref.watch(emailPasswordSignInControllerProvider(widget.formType));
     return ResponsiveScrollableCard(
@@ -125,8 +126,8 @@ class _EmailPasswordSignInContentsState
                 key: EmailPasswordSignInScreen.emailKey,
                 controller: _emailController,
                 decoration: InputDecoration(
-                  labelText: context.loc!.emailLabel,
-                  hintText: context.loc!.emailHint,
+                  labelText: context.loc.emailLabel,
+                  hintText: context.loc.emailHint,
                   enabled: !state.isLoading,
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,

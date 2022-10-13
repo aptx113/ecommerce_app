@@ -9,9 +9,9 @@ import 'responsive_center.dart';
 /// Useful for displaying forms and other widgets that need to be scrollable.
 class ResponsiveScrollableCard extends StatelessWidget {
   const ResponsiveScrollableCard({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
   final Widget child;
   @override
   Widget build(BuildContext context) {

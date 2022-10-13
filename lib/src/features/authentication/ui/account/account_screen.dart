@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widgets/action_text_button.dart';
@@ -12,7 +11,7 @@ import '../../data/fake_auth_repository.dart';
 import 'account_screen_controller.dart';
 
 class AccountScreen extends ConsumerWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,18 +24,18 @@ class AccountScreen extends ConsumerWidget {
       appBar: AppBar(
         title: state.isLoading
             ? const CircularProgressIndicator()
-            : Text(context.loc!.account),
+            : Text(context.loc.account),
         actions: [
           ActionTextButton(
-            text: context.loc!.logout,
+            text: context.loc.logout,
             onPressed: state.isLoading
                 ? null
                 : () async {
                     final logout = await showAlertDialog(
                       context: context,
-                      title: AppLocalizations.of(context)!.areYouSure,
-                      cancelActionText: AppLocalizations.of(context)!.cancel,
-                      defaultActionText: AppLocalizations.of(context)!.logout,
+                      title: context.loc.areYouSure,
+                      cancelActionText: context.loc.cancel,
+                      defaultActionText: context.loc.logout,
                     );
                     if (logout == true) {
                       ref
@@ -55,7 +54,7 @@ class AccountScreen extends ConsumerWidget {
 }
 
 class UserDataTable extends ConsumerWidget {
-  const UserDataTable({Key? key}) : super(key: key);
+  const UserDataTable({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -64,24 +63,24 @@ class UserDataTable extends ConsumerWidget {
     return DataTable(columns: [
       DataColumn(
         label: Text(
-          context.loc!.field,
+          context.loc.field,
           style: style,
         ),
       ),
       DataColumn(
         label: Text(
-          context.loc!.value,
+          context.loc.value,
           style: style,
         ),
       )
     ], rows: [
       _makeDataRow(
-        context.loc!.uidLowercase,
+        context.loc.uidLowercase,
         user?.uid ?? '',
         style,
       ),
       _makeDataRow(
-        context.loc!.emailLowercase,
+        context.loc.emailLowercase,
         user?.email ?? '',
         style,
       )
