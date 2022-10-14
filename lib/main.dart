@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:ecommerce_app/src/features/cart/data/local/local_cart_repository.dart';
+import 'package:ecommerce_app/src/features/cart/data/local/sembast_cart_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -14,7 +16,18 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
     // * Entry point of the app
-    runApp(const ProviderScope(child: MyApp()));
+    final localCartRepository = await SembastCartRepository.makeDefault();
+    runApp(ProviderScope(
+      overrides: [
+        localCartRepositoryProvider
+            .overrideWithProvider(Provider<LocalCartRepository>((ref) {
+          ref.onDispose(() => localCartRepository.dispose());
+          return localCartRepository;
+          }),
+        )
+      ],
+      child: const MyApp(),
+    ));
 
     // * This code will present some error UI if any uncaught exception happens
     FlutterError.onError = (FlutterErrorDetails details) {
