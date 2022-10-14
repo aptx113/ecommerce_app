@@ -53,12 +53,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/',
         name: AppRoute.home.name,
-        builder: (context, state) => const ProductsListScreen(),
+        builder: (_, __) => const ProductsListScreen(),
         routes: [
           GoRoute(
             path: 'product/:id',
             name: AppRoute.product.name,
-            builder: (context, state) {
+            builder: (_, state) {
               final productId = state.params['id']!;
               return ProductScreen(productId: productId);
             },
