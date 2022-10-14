@@ -1,13 +1,22 @@
+import 'dart:convert';
 
-import 'item.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../products/models/product.dart';
+import 'item.dart';
 
-class Cart {
-  const Cart([
-    this.items = const {},
-  ]);
+part 'cart.freezed.dart';
+part 'cart.g.dart';
 
-  final Map<ProductID, int> items;
+@freezed
+class Cart with _$Cart {
+  const factory Cart([@Default({}) Map<ProductID, int> items]) = _Cart;
+
+  factory Cart.fromJson(Map<String, dynamic> json) => _$CartFromJson(json);
+  factory Cart.fromJsonString(String source) =>
+      Cart.fromJson(json.decode(source));
+
+  String toJsonString() => json.encode(toJson());
 }
 
 extension CartItems on Cart {
