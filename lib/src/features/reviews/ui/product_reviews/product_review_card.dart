@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:ecommerce_app/src/utils/date_formatter.dart';
 
 import '../../../../common_widgets/alert_dialogs.dart';
 import '../../../../constants/app_sizes.dart';
 import '../../models/review.dart';
-import '../../../../utils/date_formatter.dart';
 import 'product_rating_bar.dart';
 
-class ProductReviewCard extends StatelessWidget {
+class ProductReviewCard extends ConsumerWidget {
   const ProductReviewCard(
     this.review, {
     super.key,
   });
   final Review review;
   @override
-  Widget build(BuildContext context) {
-    final dateFormatted = dataFormatter.format(review.date);
+  Widget build(BuildContext context,WidgetRef ref) {
+    final dateFormatted = ref.watch(dateFormatterProvider).format(review.date);
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(Sizes.p16),

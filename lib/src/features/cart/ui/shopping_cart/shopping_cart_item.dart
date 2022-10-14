@@ -3,7 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
+
+import 'package:ecommerce_app/src/utils/currency_formatter.dart';
 
 import '../../../../common_widgets/alert_dialogs.dart';
 import '../../../../common_widgets/async_value_widget.dart';
@@ -50,7 +51,7 @@ class ShoppingCartItem extends ConsumerWidget {
   }
 }
 
-class ShoppingCartItemContents extends StatelessWidget {
+class ShoppingCartItemContents extends ConsumerWidget {
   const ShoppingCartItemContents({
     super.key,
     required this.product,
@@ -66,8 +67,9 @@ class ShoppingCartItemContents extends StatelessWidget {
   static Key deleteKey(int index) => Key('delete-$index');
 
   @override
-  Widget build(BuildContext context) {
-    final priceFormatted = NumberFormat.simpleCurrency().format(product.price);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final priceFormatted =
+        ref.watch(currencyFormatterProvider).format(product.price);
     return ResponsiveTwoColumnLayout(
       startFlex: 1,
       endFlex: 2,
@@ -88,38 +90,61 @@ class ShoppingCartItemContents extends StatelessWidget {
           ),
           gapH24,
           isEditable
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ItemQuantitySelector(
-                      quantity: item.quantity,
-                      maxQuantity: min(product.availableQuantity, 10),
-                      itemIndex: itemIndex,
-                      onChanged: (value) {
-                        showNotImplementedAlertDialog(context: context);
-                      },
-                    ),
-                    IconButton(
-                      key: deleteKey(itemIndex),
-                      onPressed: () {
-                        showNotImplementedAlertDialog(context: context);
-                      },
-                      icon: Icon(
-                        Icons.delete,
-                        color: Colors.red[700],
-                      ),
-                    ),
-                    const Spacer(),
-                  ],
+              ? EditOrRemoveItemWidget(
+                  product: product,
+                  item: item,
+                  itemIndex: itemIndex,
                 )
               : Padding(
                   padding: const EdgeInsets.symmetric(vertical: Sizes.p8),
                   child: Text(
-                    context.loc!.quantityValue(item.quantity),
+                    context.loc.quantityValue(item.quantity),
                   ),
                 )
         ],
       ),
+    );
+  }
+}
+
+class EditOrRemoveItemWidget extends ConsumerWidget {
+  const EditOrRemoveItemWidget({
+    super.key,
+    required this.product,
+    required this.item,
+    required this.itemIndex,
+  });
+  final Product product;
+  final Item item;
+  final int itemIndex;
+
+  static Key deleteKey(int index) => Key('delete-$index');
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ItemQuantitySelector(
+          quantity: item.quantity,
+          maxQuantity: min(product.availableQuantity, 10),
+          itemIndex: itemIndex,
+          onChanged: (value) {
+            showNotImplementedAlertDialog(context: context);
+          },
+        ),
+        IconButton(
+          key: deleteKey(itemIndex),
+          onPressed: () {
+            showNotImplementedAlertDialog(context: context);
+          },
+          icon: Icon(
+            Icons.delete,
+            color: Colors.red[700],
+          ),
+        ),
+        const Spacer(),
+      ],
     );
   }
 }

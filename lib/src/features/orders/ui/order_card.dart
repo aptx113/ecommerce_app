@@ -1,12 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ecommerce_app/src/utils/currency_formatter.dart';
+import 'package:ecommerce_app/src/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/app_sizes.dart';
 import '../../../localization/string_hardcoded.dart';
 import '../../cart/models/item.dart';
 import '../models/order.dart';
-import '../../../utils/currency_formatter.dart';
-import '../../../utils/date_formatter.dart';
+
 import 'order_item_list_tile.dart';
 import 'order_status_label.dart';
 
@@ -41,7 +43,7 @@ class OrderCard extends StatelessWidget {
   }
 }
 
-class OrderHeader extends StatelessWidget {
+class OrderHeader extends ConsumerWidget {
   const OrderHeader({
     super.key,
     required this.order,
@@ -49,9 +51,10 @@ class OrderHeader extends StatelessWidget {
   final Order order;
 
   @override
-  Widget build(BuildContext context) {
-    final totalFormatted = currencyFormatter.format(order.total);
-    final dateFormatted = dataFormatter.format(order.orderDate);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final totalFormatted = ref.watch(currencyFormatterProvider).format(order.total);
+    final dateFormatted =
+        ref.watch(dateFormatterProvider).format(order.orderDate);
     return Container(
       color: Colors.grey[200],
       padding: const EdgeInsets.all(Sizes.p16),

@@ -23,7 +23,7 @@ class LeaveReviewScreen extends StatelessWidget {
     const review = null;
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.leaveReview),
+        title: Text(AppLocalizations.of(context).leaveReview),
       ),
       body: ResponsiveCenter(
         maxContentWidth: Breakpoint.tablet,
@@ -80,7 +80,7 @@ class _LeaveReviewFormState extends State<LeaveReviewForm> {
       children: [
         if (widget.review != null) ...[
           Text(
-            AppLocalizations.of(context)!.previouslyReviewedHint,
+            AppLocalizations.of(context).previouslyReviewedHint,
             textAlign: TextAlign.center,
           ),
           gapH24,
@@ -102,13 +102,13 @@ class _LeaveReviewFormState extends State<LeaveReviewForm> {
           textCapitalization: TextCapitalization.sentences,
           maxLines: 5,
           decoration: InputDecoration(
-            labelText: AppLocalizations.of(context)!.yourReviewHint,
+            labelText: AppLocalizations.of(context).yourReviewHint,
             border: const OutlineInputBorder(),
           ),
         ),
         gapH32,
         PrimaryButton(
-          text: AppLocalizations.of(context)!.submit,
+          text: AppLocalizations.of(context).submit,
           isLoading: false,
           onPressed: _rating == 0 ? null : _submitReview,
         )

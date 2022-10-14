@@ -1,17 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../constants/app_sizes.dart';
 import '../../../../routing/app_router.dart';
 
-class ShoppingCartIcon extends StatelessWidget {
+class ShoppingCartIcon extends ConsumerWidget {
   const ShoppingCartIcon({super.key});
 
   static const shoppingCartIconKey = Key('shopping-cart');
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const cartItemsCount = 3;
     return Stack(
       children: [

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../authentication/models/app_user.dart';
 import '../../../../routing/app_router.dart';
+import '../../../authentication/models/app_user.dart';
 
 enum PopupMenuOption {
   signIn(key: 'menuSignIn'),
@@ -32,19 +32,19 @@ class MoreMenuButton extends StatelessWidget {
                 PopupMenuItem(
                   key: ordersKey,
                   value: PopupMenuOption.orders,
-                  child: Text(AppLocalizations.of(context)!.orders),
+                  child: Text(AppLocalizations.of(context).orders),
                 ),
                 PopupMenuItem(
                   key: accountKey,
                   value: PopupMenuOption.account,
-                  child: Text(AppLocalizations.of(context)!.account),
+                  child: Text(AppLocalizations.of(context).account),
                 ),
               ]
             : <PopupMenuEntry<PopupMenuOption>>[
                 PopupMenuItem(
                   key: signInKey,
                   value: PopupMenuOption.signIn,
-                  child: Text(AppLocalizations.of(context)!.signIn),
+                  child: Text(AppLocalizations.of(context).signIn),
                 ),
               ];
       },

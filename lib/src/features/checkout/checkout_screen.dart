@@ -40,8 +40,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     final title = _subRoute == CheckoutSubRoute.register
-        ? context.loc!.register
-        : context.loc!.payment;
+        ? context.loc.register
+        : context.loc.payment;
 
     return Scaffold(
       appBar: AppBar(

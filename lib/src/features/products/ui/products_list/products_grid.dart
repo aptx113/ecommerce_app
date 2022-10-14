@@ -24,7 +24,7 @@ class ProductsGrid extends ConsumerWidget {
       data: (products) => products.isEmpty
           ? Center(
               child: Text(
-                AppLocalizations.of(context)!.noProductsFound,
+                AppLocalizations.of(context).noProductsFound,
                 style: Theme.of(context).textTheme.headline4,
               ),
             )

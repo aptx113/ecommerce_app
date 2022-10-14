@@ -20,7 +20,7 @@ class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     if (screenWidth < Breakpoint.tablet) {
       return AppBar(
-        title: Text(AppLocalizations.of(context)!.appBarTitle),
+        title: Text(AppLocalizations.of(context).appBarTitle),
         actions: [
           const ShoppingCartIcon(),
           MoreMenuButton(
@@ -30,24 +30,24 @@ class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
       );
     } else {
       return AppBar(
-        title: Text(AppLocalizations.of(context)!.appBarTitle),
+        title: Text(AppLocalizations.of(context).appBarTitle),
         actions: [
           const ShoppingCartIcon(),
           if (user != null) ...[
             ActionTextButton(
               key: MoreMenuButton.ordersKey,
-              text: AppLocalizations.of(context)!.orders,
+              text: AppLocalizations.of(context).orders,
               onPressed: () => context.pushNamed(AppRoute.orders.name),
             ),
             ActionTextButton(
               key: MoreMenuButton.accountKey,
-              text: AppLocalizations.of(context)!.account,
+              text: AppLocalizations.of(context).account,
               onPressed: () => context.pushNamed(AppRoute.account.name),
             ),
           ] else
             ActionTextButton(
               key: MoreMenuButton.signInKey,
-              text: AppLocalizations.of(context)!.signIn,
+              text: AppLocalizations.of(context).signIn,
               onPressed: () => context.pushNamed(AppRoute.signIn.name),
             )
         ],

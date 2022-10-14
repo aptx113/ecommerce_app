@@ -41,7 +41,7 @@ class OrderItemListTile extends ConsumerWidget {
                   Text(product.title),
                   gapH12,
                   Text(
-                    context.loc!.quantityValue(item.quantity),
+                    context.loc.quantityValue(item.quantity),
                     style: Theme.of(context).textTheme.caption,
                   ),
                 ],

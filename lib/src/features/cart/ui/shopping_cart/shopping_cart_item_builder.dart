@@ -25,7 +25,7 @@ class ShoppingCartItemsBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     if (items.isEmpty) {
       return EmptyPlaceholderWidget(
-        message: context.loc!.shoppingCartEmpty,
+        message: context.loc.shoppingCartEmpty,
       );
     }
     final screenWidth = MediaQuery.of(context).size.width;

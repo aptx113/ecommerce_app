@@ -20,14 +20,14 @@ class ShoppingCartScreen extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.shoppingCart),
+        title: Text(AppLocalizations.of(context).shoppingCart),
       ),
       body: ShoppingCartItemsBuilder(
         items: cartItemsList,
         itemBuilder: (_, item, index) =>
             ShoppingCartItem(item: item, itemIndex: index),
         ctaBuilder: (_) => PrimaryButton(
-          text: AppLocalizations.of(context)!.checkout,
+          text: AppLocalizations.of(context).checkout,
           onPressed: () => context.pushNamed(AppRoute.checkout.name),
         ),
       ),

@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:ecommerce_app/src/utils/currency_formatter.dart';
+
 import '../../../../common_widgets/async_value_widget.dart';
 import '../../../../common_widgets/custom_image.dart';
 import '../../../../common_widgets/empty_placeholder_widget.dart';
@@ -9,7 +11,6 @@ import '../../../../common_widgets/responsive_center.dart';
 import '../../../../common_widgets/responsive_two_column_layout.dart';
 import '../../../../constants/app_sizes.dart';
 import '../../../../localization/string_hardcoded.dart';
-import '../../../../utils/currency_formatter.dart';
 import '../../../cart/ui/add_to_cart/add_to_cart_widget.dart';
 import '../../../reviews/ui/product_reviews/product_reviews_list.dart';
 import '../../data/fake_products_repository.dart';
@@ -58,13 +59,14 @@ class ProductScreen extends StatelessWidget {
   }
 }
 
-class ProductDetails extends StatelessWidget {
+class ProductDetails extends ConsumerWidget {
   const ProductDetails({super.key, required this.product});
   final Product product;
 
   @override
-  Widget build(BuildContext context) {
-    final priceFormatted = currencyFormatter.format(product.price);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final priceFormatted =
+        ref.watch(currencyFormatterProvider).format(product.price);
     return ResponsiveTwoColumnLayout(
       startContent: Card(
         child: Padding(

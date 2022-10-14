@@ -40,7 +40,7 @@ class FakeProductsRepository {
 }
 
 final productsRepositoryProvider = Provider<FakeProductsRepository>((ref) {
-  return FakeProductsRepository();
+  return FakeProductsRepository(addDelay: false);
 });
 
 final productsListStreamProvider =

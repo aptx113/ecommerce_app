@@ -1,14 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:ecommerce_app/src/utils/currency_formatter.dart';
 
 import '../../../../common_widgets/custom_image.dart';
 import '../../../../constants/app_sizes.dart';
 import '../../../../localization/app_localizations_context.dart';
-import '../../../../utils/currency_formatter.dart';
 import '../../models/product.dart';
 import '../product_screen/product_average_rating.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends ConsumerWidget {
   const ProductCard({
     super.key,
     required this.product,
@@ -20,8 +22,9 @@ class ProductCard extends StatelessWidget {
   static const productCardKey = Key('product-card');
 
   @override
-  Widget build(BuildContext context) {
-    final priceFormatted = currencyFormatter.format(product.price);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final priceFormatted =
+        ref.watch(currencyFormatterProvider).format(product.price);
     return Card(
       child: InkWell(
         key: productCardKey,
@@ -51,8 +54,8 @@ class ProductCard extends StatelessWidget {
               gapH4,
               Text(
                 product.availableQuantity <= 0
-                    ? context.loc!.outOfStock
-                    : context.loc!.quantityValue(product.availableQuantity),
+                    ? context.loc.outOfStock
+                    : context.loc.quantityValue(product.availableQuantity),
                 style: Theme.of(context).textTheme.caption,
               )
             ],

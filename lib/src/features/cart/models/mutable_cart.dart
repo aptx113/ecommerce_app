@@ -3,24 +3,30 @@ import 'item.dart';
 import '../../products/models/product.dart';
 
 extension MutableCart on Cart {
+  Cart setItem(Item item) {
+    final copy = Map<ProductID, int>.from(items);
+    copy[item.productId] = item.quantity;
+    return Cart(copy);
+  }
+
   Cart addItem(Item item) {
     final copy = Map<ProductID, int>.from(items);
-    if (copy.containsKey(item.productId)) {
-      copy[item.productId] = item.quantity + copy[item.productId]!;
-    } else {
-      copy[item.productId] = item.quantity;
-    }
+    copy.update(
+      item.productId,
+      (value) => item.quantity + value,
+      ifAbsent: () => item.quantity,
+    );
     return Cart(copy);
   }
 
   Cart addItems(List<Item> itemsToAdd) {
     final copy = Map<ProductID, int>.from(items);
     for (var item in itemsToAdd) {
-      if (copy.containsKey(item.productId)) {
-        copy[item.productId] = item.quantity + copy[item.productId]!;
-      } else {
-        copy[item.productId] = item.quantity;
-      }
+      copy.update(
+        item.productId,
+        (value) => item.quantity + value,
+        ifAbsent: () => item.quantity,
+      );
     }
     return Cart(copy);
   }
@@ -29,16 +35,6 @@ extension MutableCart on Cart {
     final copy = Map<ProductID, int>.from(items);
     copy.remove(productId);
     return Cart(copy);
-  }
-
-  Cart updateItemIfExists(Item item) {
-    if (items.containsKey(item.productId)) {
-      final copy = Map<ProductID, int>.from(items);
-      copy[item.productId] = item.quantity;
-      return Cart(copy);
-    } else {
-      return this;
-    }
   }
 
   Cart clear() {
