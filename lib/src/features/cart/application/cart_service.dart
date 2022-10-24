@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../authentication/data/fake_auth_repository.dart';
 import '../../products/models/product.dart';
@@ -8,6 +9,8 @@ import '../data/remote/remote_cart_repository.dart';
 import '../models/cart.dart';
 import '../models/item.dart';
 import '../models/mutable_cart.dart';
+
+part 'cart_service.g.dart';
 
 class CartService {
   CartService(this.ref);
@@ -50,6 +53,7 @@ class CartService {
   }
 }
 
-final cartServiceProvider = Provider<CartService>((ref) {
+@riverpod
+CartService cartService(CartServiceRef ref) {
   return CartService(ref);
-});
+}

@@ -19,6 +19,7 @@ dependencies:
     sdk: flutter
   flutter_rating_bar: ^4.0.1
   flutter_riverpod: ^2.0.0-dev.9
+  riverpod_annotation: ^1.0.4
   freezed_annotation: ^2.1.0
   go_router: ^5.0.5
   intl: 0.17.0
@@ -39,6 +40,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   json_serializable: ^6.3.2
+  riverpod_generator: ^1.0.4
 
 # Custom app icon. For more info see: https://pub.dev/packages/flutter_launcher_icons
 flutter_icons:

@@ -1,14 +1,16 @@
 import 'package:ecommerce_app/src/utils/delay.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../constants/test_products.dart';
 import '../models/product.dart';
+
+part 'fake_products_repository.g.dart';
 
 class FakeProductsRepository {
   FakeProductsRepository({this.addDelay = true});
   final bool addDelay;
   final _products = testProducts;
-
 
   List<Product> get getProductsList => _products;
 
@@ -39,9 +41,9 @@ class FakeProductsRepository {
   }
 }
 
-final productsRepositoryProvider = Provider<FakeProductsRepository>((ref) {
-  return FakeProductsRepository(addDelay: false);
-});
+@riverpod
+FakeProductsRepository productsRepository(ProductsRepositoryRef ref) =>
+    FakeProductsRepository(addDelay: false);
 
 final productsListStreamProvider =
     StreamProvider.autoDispose<List<Product>>((ref) {
@@ -49,18 +51,8 @@ final productsListStreamProvider =
   return productsRepository.watchProductsList();
 });
 
-final productsListFutureProvider =
-    FutureProvider.autoDispose<List<Product>>((ref) {
-  final productsRepository = ref.watch(productsRepositoryProvider);
-  return productsRepository.fetchProductsList();
-});
-
 final productStreamProvider =
-    StreamProvider.autoDispose.family<Product?, String>(
-  (ref, id) {
-    final productsRepository = ref.watch(productsRepositoryProvider);
-    return productsRepository.watchProduct(id);
-  },
-  disposeDelay: const Duration(seconds: 10),
-  cacheTime: const Duration(seconds: 10),
-);
+    StreamProvider.autoDispose.family<Product?, String>((ref, id) {
+  final productsRepository = ref.watch(productsRepositoryProvider);
+  return productsRepository.watchProduct(id);
+});
