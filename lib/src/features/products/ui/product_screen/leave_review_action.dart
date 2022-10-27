@@ -34,9 +34,9 @@ class LeaveReviewAction extends ConsumerWidget {
             breakpoint: 300,
             startFlex: 3,
             endFlex: 2,
-            rowMainAxisAligment: MainAxisAlignment.spaceBetween,
-            rowCrossAxisAligment: CrossAxisAlignment.center,
-            columnCrossAxisAligment: CrossAxisAlignment.center,
+            rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
+            rowCrossAxisAlignment: CrossAxisAlignment.center,
+            columnCrossAxisAlignment: CrossAxisAlignment.center,
             startContent: Text(
                 AppLocalizations.of(context).purchasedOnDate(dateFormatted)),
             endContent: CustomTextButton(

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import '../constants/breakpoints.dart';
@@ -21,7 +20,11 @@ class ResponsiveCenter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Use Center as it has *unconstrained* width (loose constraints)
     return Center(
+      // together with SizedBox to specify the max width (tight constraints)
+      // See this thread for more info:
+      // https://twitter.com/biz84/status/1445400059894542337
       child: SizedBox(
         width: maxContentWidth,
         child: Padding(
@@ -33,6 +36,7 @@ class ResponsiveCenter extends StatelessWidget {
   }
 }
 
+/// Sliver-equivalent of [ResponsiveCenter].
 class ResponsiveSliverCenter extends StatelessWidget {
   const ResponsiveSliverCenter({
     super.key,
@@ -43,7 +47,6 @@ class ResponsiveSliverCenter extends StatelessWidget {
   final double maxContentWidth;
   final EdgeInsetsGeometry padding;
   final Widget child;
-
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(

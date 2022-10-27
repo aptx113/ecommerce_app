@@ -1,16 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:math';
 
+import 'package:ecommerce_app/src/features/cart/ui/add_to_cart/add_to_cart_controller.dart';
+import 'package:ecommerce_app/src/localization/app_localizations_context.dart';
+import 'package:ecommerce_app/src/utils/async_value_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../common_widgets/alert_dialogs.dart';
 import '../../../../common_widgets/item_quantity_selector.dart';
 import '../../../../common_widgets/primary_button.dart';
 import '../../../../constants/app_sizes.dart';
-import '../../../../localization/string_hardcoded.dart';
 import '../../../products/models/product.dart';
 
-class AddToCartWidget extends StatelessWidget {
+class AddToCartWidget extends ConsumerWidget {
   const AddToCartWidget({
     super.key,
     required this.product,
@@ -18,8 +20,13 @@ class AddToCartWidget extends StatelessWidget {
   final Product product;
 
   @override
-  Widget build(BuildContext context) {
-    const availableQuantity = 5;
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<AsyncValue<int>>(
+      addToCartControllerProvider,
+      (_, state) => state.showAlertDialogOnError(context),
+    );
+    final availableQuantity = product.availableQuantity;
+    final state = ref.watch(addToCartControllerProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -27,13 +34,15 @@ class AddToCartWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Quantity'.hardcoded),
+            Text(context.loc.quantity),
             ItemQuantitySelector(
-              quantity: 1,
+              quantity: state.value!,
               maxQuantity: min(availableQuantity, 10),
-              onChanged: (value) {
-                showNotImplementedAlertDialog(context: context);
-              },
+              onChanged: state.isLoading
+                  ? null
+                  : (quantity) => ref
+                      .read(addToCartControllerProvider.notifier)
+                      .updateQuantity(quantity),
             )
           ],
         ),
@@ -41,18 +50,20 @@ class AddToCartWidget extends StatelessWidget {
         const Divider(),
         gapH8,
         PrimaryButton(
-          isLoading: false,
-          onPressed: () {
-            showNotImplementedAlertDialog(context: context);
-          },
+          isLoading: state.isLoading,
+          onPressed: availableQuantity > 0
+              ? () => ref
+                  .read(addToCartControllerProvider.notifier)
+                  .addItem(product.id)
+              : null,
           text: availableQuantity > 0
-              ? 'Add to Cart'.hardcoded
-              : 'Out of Stock'.hardcoded,
+              ? context.loc.addToCart
+              : context.loc.outOfStock,
         ),
         if (product.availableQuantity > 0 && availableQuantity == 0) ...[
           gapH8,
           Text(
-            'Already added to cart'.hardcoded,
+            context.loc.alreadyAddedToCart,
             style: Theme.of(context).textTheme.caption,
             textAlign: TextAlign.center,
           )

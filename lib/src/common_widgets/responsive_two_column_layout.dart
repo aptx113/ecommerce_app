@@ -14,10 +14,10 @@ class ResponsiveTwoColumnLayout extends StatelessWidget {
     this.endFlex = 1,
     this.breakpoint = Breakpoint.tablet,
     required this.spacing,
-    this.rowMainAxisAligment = MainAxisAlignment.start,
-    this.rowCrossAxisAligment = CrossAxisAlignment.start,
-    this.columnMainAxisAligment = MainAxisAlignment.start,
-    this.columnCrossAxisAligment = CrossAxisAlignment.stretch,
+    this.rowMainAxisAlignment = MainAxisAlignment.start,
+    this.rowCrossAxisAlignment = CrossAxisAlignment.start,
+    this.columnMainAxisAlignment = MainAxisAlignment.start,
+    this.columnCrossAxisAlignment = CrossAxisAlignment.stretch,
   });
   final Widget startContent;
   final Widget endContent;
@@ -25,28 +25,28 @@ class ResponsiveTwoColumnLayout extends StatelessWidget {
   final int endFlex;
   final double breakpoint;
   final double spacing;
-  final MainAxisAlignment rowMainAxisAligment;
-  final CrossAxisAlignment rowCrossAxisAligment;
-  final MainAxisAlignment columnMainAxisAligment;
-  final CrossAxisAlignment columnCrossAxisAligment;
+  final MainAxisAlignment rowMainAxisAlignment;
+  final CrossAxisAlignment rowCrossAxisAlignment;
+  final MainAxisAlignment columnMainAxisAlignment;
+  final CrossAxisAlignment columnCrossAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraint) {
-      if (constraint.maxWidth >= breakpoint) {
+    return LayoutBuilder(builder: (context, constraints) {
+      if (constraints.maxWidth >= breakpoint) {
         return Row(
-          mainAxisAlignment: rowMainAxisAligment,
-          crossAxisAlignment: rowCrossAxisAligment,
+          mainAxisAlignment: rowMainAxisAlignment,
+          crossAxisAlignment: rowCrossAxisAlignment,
           children: [
             Flexible(flex: startFlex, child: startContent),
             SizedBox(width: spacing),
-            Flexible(flex: endFlex, child: endContent)
+            Flexible(flex: endFlex, child: endContent),
           ],
         );
       } else {
         return Column(
-          mainAxisAlignment: columnMainAxisAligment,
-          crossAxisAlignment: columnCrossAxisAligment,
+          mainAxisAlignment: columnMainAxisAlignment,
+          crossAxisAlignment: columnCrossAxisAlignment,
           children: [
             startContent,
             SizedBox(height: spacing),
