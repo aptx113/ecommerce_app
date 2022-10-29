@@ -57,3 +57,12 @@ class CartService {
 CartService cartService(CartServiceRef ref) {
   return CartService(ref);
 }
+
+final cartStreamProvider = StreamProvider<Cart>((ref) {
+  final user = ref.watch(authStateChangesProvider).value;
+  if (user != null) {
+    return ref.watch(remoteCartRepositoryProvider).watchCart(user.uid);
+  } else {
+    return ref.watch(localCartRepositoryProvider).watchCart();
+  }
+});

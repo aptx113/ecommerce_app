@@ -25,7 +25,7 @@ class FakeAuthRepository implements AuthRepository {
   @override
   Future<void> signInWithEmailAndPassword(String email, String password) async {
     await delay(addDelay);
-      _createNewUser(email);
+    _createNewUser(email);
   }
 
   @override
@@ -54,7 +54,7 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return authRepo;
 });
 
-final authStateChangesProvider = StreamProvider.autoDispose<AppUser?>((ref) {
+final authStateChangesProvider = StreamProvider<AppUser?>((ref) {
   final authRepository = ref.watch(authRepositoryProvider);
   return authRepository.authStateChanges();
 });
