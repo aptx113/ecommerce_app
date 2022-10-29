@@ -30,7 +30,7 @@ class _SystemHash {
 }
 
 String $ShoppingCartScreenControllerHash() =>
-    r'763aac4d3d500ce43544fc71094b39b388e5a8d9';
+    r'1ecec60ea35d2c6a4f9101fd82408e674ac3656a';
 
 /// See also [ShoppingCartScreenController].
 final shoppingCartScreenControllerProvider =

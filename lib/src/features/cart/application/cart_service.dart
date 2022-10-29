@@ -66,3 +66,10 @@ final cartStreamProvider = StreamProvider<Cart>((ref) {
     return ref.watch(localCartRepositoryProvider).watchCart();
   }
 });
+@riverpod
+int cartItemsCount(CartItemsCountRef ref) {
+  return ref.watch(cartStreamProvider).maybeMap(
+        data: (cart) => cart.value.items.length,
+        orElse: () => 0,
+      );
+}
