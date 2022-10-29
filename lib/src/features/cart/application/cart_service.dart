@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ecommerce_app/src/features/products/data/fake_products_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -72,4 +73,21 @@ int cartItemsCount(CartItemsCountRef ref) {
         data: (cart) => cart.value.items.length,
         orElse: () => 0,
       );
+}
+
+@riverpod
+double cartTotal(CartTotalRef ref) {
+  final cart = ref.watch(cartStreamProvider).value ?? const Cart();
+  final productsList = ref.watch(productsListStreamProvider).value ?? [];
+  if (cart.items.isNotEmpty && productsList.isNotEmpty) {
+    var total = 0.0;
+    for (final item in cart.items.entries) {
+      final product =
+          productsList.firstWhere((product) => product.id == item.key);
+      total += product.price * item.value;
+    }
+    return total;
+  } else {
+    return 0.0;
+  }
 }

@@ -39,7 +39,7 @@ final cartServiceProvider = AutoDisposeProvider<CartService>(
       const bool.fromEnvironment('dart.vm.product') ? null : $cartServiceHash,
 );
 typedef CartServiceRef = AutoDisposeProviderRef<CartService>;
-String $cartItemsCountHash() => r'1995bd1506b26ffbbbb56a36c88ee3270d869f5e';
+String $cartItemsCountHash() => r'191c005927bada0b48381eeb0f7a22882666d143';
 
 /// See also [cartItemsCount].
 final cartItemsCountProvider = AutoDisposeProvider<int>(
@@ -50,3 +50,13 @@ final cartItemsCountProvider = AutoDisposeProvider<int>(
       : $cartItemsCountHash,
 );
 typedef CartItemsCountRef = AutoDisposeProviderRef<int>;
+String $cartTotalHash() => r'38ed79239b926c6519ed383a0b594c9826e8d0a0';
+
+/// See also [cartTotal].
+final cartTotalProvider = AutoDisposeProvider<double>(
+  cartTotal,
+  name: r'cartTotalProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : $cartTotalHash,
+);
+typedef CartTotalRef = AutoDisposeProviderRef<double>;
