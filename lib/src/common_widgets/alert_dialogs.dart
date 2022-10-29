@@ -15,7 +15,7 @@ Future<bool?> showAlertDialog({
   String? cancelActionText,
   String defaultActionText = 'OK',
 }) async {
-  if (kIsWeb || Platform.isIOS) {
+  if (kIsWeb || Platform.isAndroid) {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
