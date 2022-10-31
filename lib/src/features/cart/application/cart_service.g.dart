@@ -50,7 +50,7 @@ final cartItemsCountProvider = AutoDisposeProvider<int>(
       : $cartItemsCountHash,
 );
 typedef CartItemsCountRef = AutoDisposeProviderRef<int>;
-String $cartTotalHash() => r'38ed79239b926c6519ed383a0b594c9826e8d0a0';
+String $cartTotalHash() => r'4305f7011367158b35081c2968f36f09c8d40903';
 
 /// See also [cartTotal].
 final cartTotalProvider = AutoDisposeProvider<double>(
@@ -60,3 +60,73 @@ final cartTotalProvider = AutoDisposeProvider<double>(
       const bool.fromEnvironment('dart.vm.product') ? null : $cartTotalHash,
 );
 typedef CartTotalRef = AutoDisposeProviderRef<double>;
+String $itemAvailableQuantityHash() =>
+    r'239fc8ae7ce7bd07495892cb527d97b335b83031';
+
+/// See also [itemAvailableQuantity].
+class ItemAvailableQuantityProvider extends AutoDisposeProvider<int> {
+  ItemAvailableQuantityProvider(
+    this.product,
+  ) : super(
+          (ref) => itemAvailableQuantity(
+            ref,
+            product,
+          ),
+          from: itemAvailableQuantityProvider,
+          name: r'itemAvailableQuantityProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : $itemAvailableQuantityHash,
+        );
+
+  final Product product;
+
+  @override
+  bool operator ==(Object other) {
+    return other is ItemAvailableQuantityProvider && other.product == product;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, product.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+typedef ItemAvailableQuantityRef = AutoDisposeProviderRef<int>;
+
+/// See also [itemAvailableQuantity].
+final itemAvailableQuantityProvider = ItemAvailableQuantityFamily();
+
+class ItemAvailableQuantityFamily extends Family<int> {
+  ItemAvailableQuantityFamily();
+
+  ItemAvailableQuantityProvider call(
+    Product product,
+  ) {
+    return ItemAvailableQuantityProvider(
+      product,
+    );
+  }
+
+  @override
+  AutoDisposeProvider<int> getProviderOverride(
+    covariant ItemAvailableQuantityProvider provider,
+  ) {
+    return call(
+      provider.product,
+    );
+  }
+
+  @override
+  List<ProviderOrFamily>? get allTransitiveDependencies => null;
+
+  @override
+  List<ProviderOrFamily>? get dependencies => null;
+
+  @override
+  String? get name => r'itemAvailableQuantityProvider';
+}
