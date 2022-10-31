@@ -1,10 +1,12 @@
 import 'dart:async';
 
-import 'package:ecommerce_app/src/features/cart/data/local/local_cart_repository.dart';
-import 'package:ecommerce_app/src/features/cart/data/local/sembast_cart_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import 'package:ecommerce_app/src/features/cart/application/cart_sync_service.dart';
+import 'package:ecommerce_app/src/features/cart/data/local/local_cart_repository.dart';
+import 'package:ecommerce_app/src/features/cart/data/local/sembast_cart_repository.dart';
 
 import 'src/app.dart';
 import 'src/localization/string_hardcoded.dart';
@@ -15,17 +17,17 @@ void main() async {
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
     GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
-    // * Entry point of the app
     final localCartRepository = await SembastCartRepository.makeDefault();
-    runApp(ProviderScope(
+    final container = ProviderContainer(
       overrides: [
-        localCartRepositoryProvider
-            .overrideWithProvider(Provider<LocalCartRepository>((ref) {
-          ref.onDispose(() => localCartRepository.dispose());
-          return localCartRepository;
-          }),
-        )
+        localCartRepositoryProvider.overrideWithValue(localCartRepository),
       ],
+    );
+    // * Initialize CartSyncService to start the listener
+    container.read(cartSyncServiceProvider);
+    // * Entry point of the app
+    runApp(UncontrolledProviderScope(
+      container: container,
       child: const MyApp(),
     ));
 
